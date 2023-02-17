@@ -14,19 +14,29 @@
                   <div class="text-center">
                     <h2>{{title}}</h2>
                   </div>
+
+                  <p v-if="item in itemsRes" :key="item">
+                    <v-alert color="success">
+                      {{item}}
+                    </v-alert>
+                  </p>
                   <v-form style="margin-top:30px;" @submit="LoginHandleForm">
                     <v-text-field
                       type="email"
                       v-model="uname"
                       label="Email"
+                      placeholder="Enter your email"
                       prepend-inner-icon="mdi-account"
                     ></v-text-field>
                     <v-text-field
-                      type="password"
+                      :append-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+                      :type="visible ? 'password' : 'text'"
+                      density="compact"
                       label="Password"
-                      v-model="pswd"
+                      placeholder="Enter your password"
                       prepend-inner-icon="mdi-lock"
-                      append-icon="mdi-eye"
+                      variant="outlined"
+                      @click:append-icon="visible = !visible"
                     ></v-text-field>
                     <v-btn
                       color="info"
@@ -57,7 +67,7 @@
 </template>
 
 <script>
-
+// import axios from 'axios'
 export default {
   name: 'LoginPage',
 
@@ -67,14 +77,18 @@ export default {
       uname:'',
       pswd:'',
       reveal: false,
+      visible:true,
+      itemsRes:[],
     }
   },
 
   methods:{
-      LoginHandleForm(e){
-        e.preventDefault()
-
-        console.log(this.uname+" "+this.pswd);
+      // async LoginHandleForm(e){
+      //   e.preventDefault()
+      async getData(){
+        const res=await fetch('http://127.0.0.1:8000/api/login')
+        const finalRes=await res.json();
+        console.log(finalRes);
       }
   }
 };

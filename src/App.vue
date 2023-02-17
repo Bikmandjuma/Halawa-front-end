@@ -111,6 +111,12 @@ export default {
 </script>
 
 <style scoped>
+
+  #app {
+    background: url('https://ohlaladdani.com.br/wp-content/uploads/wallpaper-OHLALADANI_DESKTOP_WALLPAPERS_AVENTURA-2.jpg')
+      no-repeat center center fixed !important;
+    background-size: cover;
+  }
   #tabs_nav{
     margin-top: -10px;
     margin-left: 500px;
@@ -132,7 +138,7 @@ export default {
   }
 
   #footer{
-    background-color:lightgray;
+    background-image:url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fwood-background&psig=AOvVaw23tokkHRTkq9Dq91GUA7jp&ust=1676672312828000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCPDk3Z-Jm_0CFQAAAAAdAAAAABAR');
     color:black;
   }
 
@@ -159,6 +165,10 @@ export default {
 
   #footer-address a:hover{
     margin-left: 5px;
+  }
+
+  a{
+    text-decoration: none;
   }
 
 

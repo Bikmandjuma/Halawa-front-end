@@ -19,6 +19,7 @@
                       type="email"
                       v-model="uname"
                       label="Email"
+                      placeholder="Enter your email"
                       prepend-inner-icon="mdi-account"
                     ></v-text-field>
                   
@@ -37,7 +38,7 @@
                     style="padding-left:90px;"
                     class="exp_btn"
                   >
-                   <router-link to="/login" class="backtologin"><v-icon>mdi-arrow-bottom-left</v-icon>Back to login</router-link>
+                   <router-link to="/login" class="backtologin"><v-icon>mdi-chevron-left</v-icon>Back to login</router-link>
                   </p>
                 </v-card-actions>
               </v-card>

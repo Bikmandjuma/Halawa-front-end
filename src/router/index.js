@@ -3,7 +3,10 @@ import VueRouter from 'vue-router'
 import LoginPage from '../components/LoginPage.vue'
 import Forgotpswd from '../components/credential/ForgotPassword.vue'
 import Employee from '../components/EmployeesList.vue'
-
+import ComplainForm from '../components/ComplainForm.vue'
+import news from '../components/citizens/SectorNews.vue'
+import service from '../components/citizens/SectorService.vue'
+import HomePage from '../components/citizens/HomePage.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +26,30 @@ const routes = [
     path: '/forgot-password',
     name: 'forgot-password',
     component: Forgotpswd
+  },
+
+  {
+    path: '/complain',
+    name: 'citizen-complain',
+    component: ComplainForm
+  },
+
+   {
+    path: '/',
+    name: 'HomePage',
+    component: HomePage
+  },
+
+   {
+    path: '/amakuru',
+    name: 'news',
+    component: news
+  },
+
+   {
+    path: '/serivise',
+    name: 'service',
+    component: service
   },
 
 ]
