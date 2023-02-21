@@ -15,11 +15,11 @@
             class="d-none d-sm-flex"
             id="tabs_nav"
           >
-            <tab><router-link to="/">AHABANZA</router-link></tab>
-            <tab><router-link to="/amakuru">AMAKURU</router-link></tab>
-            <tab><router-link to="/serivise">SERIVISE</router-link></tab>
-            <tab><router-link to="/complain">WABA UFITE IKIBAZO</router-link></tab>
-            <tab><router-link to="/abakozi">ABAKOZI</router-link></tab>
+            <tab><router-link to="/"><v-icon color="primary" class="main-link">mdi-home</v-icon>AHABANZA</router-link></tab>
+            <tab><router-link to="/amakuru"><v-icon color="primary" class="main-link">mdi-newspaper</v-icon>AMAKURU</router-link></tab>
+            <tab><router-link to="/serivise"><v-icon color="primary" class="main-link">mdi-wrench</v-icon>SERIVISE</router-link></tab>
+            <tab><router-link to="/complain"><v-icon color="primary" class="main-link">mdi-pen</v-icon>WABA UFITE IKIBAZO</router-link></tab>
+            <tab><router-link to="/abakozi"><v-icon color="primary" class="main-link">mdi-account-multiple</v-icon>ABAKOZI</router-link></tab>
           </v-tabs>
         </template>
     </v-app-bar>
@@ -34,10 +34,11 @@
         dense
       >
         <v-list-item-group>
-          <v-list-item><router-link to="/">Ahabanza</router-link></v-list-item>
-             <v-list-item><router-link to="/amakuru">Amakuru</router-link></v-list-item>
-             <v-list-item><router-link to="/serivise">Serivise</router-link></v-list-item>
-             <v-list-item><router-link to="/complain">Waba ufite ikibazo</router-link></v-list-item>
+          <v-list-item><router-link to="/"><v-icon color="primary" class="main-link">mdi-home</v-icon>Ahabanza</router-link></v-list-item>
+             <v-list-item><router-link to="/amakuru"><v-icon color="primary" class="main-link">mdi-newspaper</v-icon>Amakuru</router-link></v-list-item>
+             <v-list-item><router-link to="/serivise"><v-icon color="primary" class="main-link">mdi-wrench</v-icon>Serivise</router-link></v-list-item>
+             <v-list-item><router-link to="/complain"><v-icon color="primary" class="main-link">mdi-pen</v-icon>Waba ufite ikibazo</router-link></v-list-item>
+             <v-list-item><router-link to="/abakozi"><v-icon color="primary" class="main-link">mdi-account-multipe</v-icon>Abakozi</router-link></v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -63,39 +64,75 @@
     <v-footer id="footer">
       <v-row>
         <v-col cols="12" md="4" ms="12" class="text-center">
-          <h3><v-icon>mdi-home</v-icon>Masaka Sector</h3><br>
+          <h3><v-icon color="white">mdi-home</v-icon>Masaka Sector</h3><br>
           <p>Muhawe ikaze mu murenge wa masaka <br>waba ufite ikibazo ?</p>
           <router-link to="/complain"> <v-btn color="primary">Kanda hano</v-btn></router-link>
         </v-col>
         <v-col cols="12" md="4" ms="12" id="footer-links">
-          <h3 class="text-center"><v-icon>mdi-hand-down</v-icon> Aho Wakanda(links)</h3><br>
+          <h3 class="text-center"><v-icon color="white">mdi-hand-down</v-icon> Aho Wakanda(links)</h3><br>
           
-            <p><router-link to="/"><v-icon>mdi-home</v-icon> Ahabanza</router-link></p>
-            <p><router-link to="/amakuru"><v-icon>mdi-paper</v-icon> Amakuru</router-link></p>
-            <p><router-link to="/serivise"><v-icon>mdi-wrench</v-icon> Serivise</router-link></p>
-            <p><router-link to="/complai"><i class="fa fa-question"></i> Waba ufite ikibazo</router-link></p>
-            <p><router-link to="/abakozi"><v-icon>mdi-account</v-icon> Abakozi</router-link></p>
-            <p><router-link to="/login"><v-icon>mdi-lock-open</v-icon> Fungura(Login)</router-link></p>
+          <v-row class="text-center">
+            <v-col
+                cols="12"
+                sm="6"
+                md="6"
+            >
+              <p><router-link to="/"><v-icon color="white">mdi-home</v-icon> Ahabanza</router-link></p>
+          
+              <p><router-link to="/amakuru"><v-icon color="white">mdi-newspaper</v-icon> Amakuru</router-link></p>
+            
+              <p><router-link to="/serivise"><v-icon color="white">mdi-wrench</v-icon> Serivise</router-link></p>
+            </v-col>
+
+            <v-col
+                cols="12"
+                sm="6"
+                md="6"
+            >
+              <p><router-link to="/complain"><v-icon color="white">mdi-pen</v-icon> Waba ufite ikibazo</router-link></p>
+            
+              <p><router-link to="/abakozi"><v-icon color="white">mdi-account-multiple</v-icon> Abakozi</router-link></p>
+           
+              <p><router-link to="/login"><v-icon color="white">mdi-lock-open</v-icon> Fungura(Login)</router-link></p>
+            </v-col>
+
+          </v-row>
 
         </v-col>
         <v-col cols="12" md="4" ms="12" id="footer-address" class="text-center">
           <h3>Aho Wadusanga (Address)</h3><br>
-            <p><router-link to="/contact"><v-icon>mdi-phone</v-icon> +250785389000</router-link></p>
-            <p><router-link to="#"><v-icon>mdi-map</v-icon>Kigali,Kicukiro,Masaka</router-link></p>
+            <p><router-link to="/contact"><v-icon color="white">mdi-phone</v-icon> +250785389000</router-link></p>
+            <p><router-link to="#"><v-icon color="white">mdi-map</v-icon>Kigali,Kicukiro,Masaka</router-link></p>
             <div id="footer-social-media">
-              <router-link to="/facebook"><v-icon>mdi-facebook</v-icon> </router-link>
-              <router-link to="/whatsapp"><v-icon>mdi-whatsapp</v-icon></router-link>
-              <router-link to="/twitter"><v-icon>mdi-twitter</v-icon></router-link>
-              <router-link to="/email"><v-icon>mdi-email</v-icon></router-link>
+              <router-link to="/facebook"><v-icon color="white">mdi-facebook</v-icon></router-link>
+              <router-link to="/whatsapp"><v-icon color="white">mdi-whatsapp</v-icon></router-link>
+              <router-link to="/twitter"><v-icon color="white">mdi-twitter</v-icon></router-link>
+              <router-link to="/email"><v-icon color="white">mdi-email</v-icon></router-link>
             </div>
         </v-col>
+        
+        <v-row>
+         <v-col
+              cols="12"
+              sm="12"
+              md="12"
+              class="text-center"
+        >
+          <p>Copyright &copy; {{currentyear}} , Masaka sector </p>
+
+        </v-col>
       </v-row>
+
+
+      </v-row>
+
     </v-footer>
     
   </v-app>
 </template>
 <script>
 export default {
+  
   name: 'App',
   data () {
     return {
@@ -104,9 +141,15 @@ export default {
       image:{
         avatar:'masaka.jpg'
       },
+
+      currentyear:2023
       
     }
+  },
+  props:{
+    // currentyear=new Date.getFullYear();
   }
+
 }
 </script>
 
@@ -138,19 +181,20 @@ export default {
   }
 
   #footer{
-    background-image:url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fwood-background&psig=AOvVaw23tokkHRTkq9Dq91GUA7jp&ust=1676672312828000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCPDk3Z-Jm_0CFQAAAAAdAAAAABAR');
-    color:black;
+    background-color:#3D2232;
+    color:whitesmoke;
   }
+
 
   #footer-links a{
     text-decoration: none;
-    color:black;
-    margin-left: 130px;
+    color:whitesmoke;
+/*    margin-left: 130px;*/
   }
 
   #footer-links a:hover{
-    color:red;
-    margin-left:135px;
+    color:black;
+/*    margin-left:135px;*/
   }
 
   #footer-social-media a{
@@ -160,7 +204,7 @@ export default {
 
   #footer-address a{
     text-decoration: none;
-    color: black;
+    color:white;
   }
 
   #footer-address a:hover{
@@ -171,5 +215,19 @@ export default {
     text-decoration: none;
   }
 
+  /*@media(max-width:376px){
+    #footer{
+      padding-top:10px;
+    }
+
+    #complain_select,#complain_file{
+         margin-top:-25;
+    }
+
+  }*/
+
+  .main-link{
+    margin-top: -5px;
+  }
 
 </style>
