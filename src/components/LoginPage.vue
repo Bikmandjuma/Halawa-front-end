@@ -20,19 +20,23 @@
                       {{item}}
                     </v-alert>
                   </p>
-                  <v-form style="margin-top:30px;" @submit="LoginHandleForm">
+                  <v-form style="margin-top:30px;" @submit.prevent="LoginHandleForm()" ref="form">
                     <v-text-field
                       type="email"
                       v-model="uname"
                       label="Email"
+                      required
+                      :rules="nameRules"
                       placeholder="Enter your email"
-                      prepend-inner-icon="mdi-account"
+                      prepend-inner-icon="mdi-email"
                     ></v-text-field>
                     <v-text-field
                       :append-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
                       :type="visible ? 'password' : 'text'"
                       density="compact"
                       label="Password"
+                      required
+                      :rules="passRules"
                       placeholder="Enter your password"
                       prepend-inner-icon="mdi-lock"
                       variant="outlined"
@@ -41,6 +45,7 @@
                     <v-btn
                       color="info"
                       type="submit"
+                      @click="validate"
                     ><v-icon>mdi-lock-open</v-icon>Login
                     </v-btn>
                   </v-form>
@@ -75,7 +80,13 @@ export default {
     return {
       title:'Login here',
       uname:'',
+      nameRules:[
+        v => !!v || 'Email is required !'
+      ],
       pswd:'',
+      passRules:[
+        v =>!!v || 'Password is required !'
+      ],
       reveal: false,
       visible:true,
       itemsRes:[],
@@ -83,14 +94,23 @@ export default {
   },
 
   methods:{
-      // async LoginHandleForm(e){
-      //   e.preventDefault()
-      async getData(){
-        const res=await fetch('http://127.0.0.1:8000/api/login')
-        const finalRes=await res.json();
-        console.log(finalRes);
-      }
+      async validate(){
+        const {valid} =await this.$refs.form.validate();
+
+        if (valid) {
+          alert('form is valid !');
+        }
+        
+        // async getData(){
+        //   const res=await fetch('http://127.0.0.1:8000/api/login')
+        //   const finalRes=await res.json();
+        //   console.log(finalRes);
+        // }
+
+    }
+
   }
+
 };
 </script>
 

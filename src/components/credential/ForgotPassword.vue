@@ -14,11 +14,13 @@
                   <div class="text-center">
                     <h2>{{title}}</h2>
                   </div>
-                  <v-form style="margin-top:30px;" @submit="LoginHandleForm">
+                  <v-form style="margin-top:30px;" @submit.prevent="LoginHandleForm" ref="form">
                     <v-text-field
                       type="email"
-                      v-model="uname"
+                      v-model="email"
                       label="Email"
+                      required
+                      :rules="frgtpaswdRules"
                       placeholder="Enter your email"
                       prepend-inner-icon="mdi-account"
                     ></v-text-field>
@@ -26,6 +28,8 @@
                     <v-btn
                       color="info"
                       type="submit"
+                      class="mt-4"
+                      @click="validate"
                     ><v-icon>mdi-email</v-icon>Send reset link
                     </v-btn>
                   </v-form>
@@ -34,7 +38,6 @@
                   <p
                     text
                     color="teal accent-4"
-                    @click="reveal=true"
                     style="padding-left:90px;"
                     class="exp_btn"
                   >
@@ -58,17 +61,22 @@ export default {
   data(){
     return {
       title:'Forgot Password',
-      uname:'',
-      pswd:'',
-      reveal: false,
+      email:'',
+      frgtpaswdRules:[
+        v => !!v || 'Email is required !'
+      ],
+
     }
   },
 
   methods:{
-      LoginHandleForm(e){
-        e.preventDefault()
+      async validate(){
+        const {valid}=await this.$refs.form.validate();
 
-        console.log(this.uname+" "+this.pswd);
+        if (valid) {
+          console.log(this.email);
+        }
+
       }
   }
 };
@@ -95,6 +103,6 @@ export default {
 
    .forgotpswd-row{
       margin-top:30px;
-      margin-bottom:100px;
+      margin-bottom:84px;
     }
 </style>

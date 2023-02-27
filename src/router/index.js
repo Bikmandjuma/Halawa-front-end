@@ -7,6 +7,7 @@ import ComplainForm from '../components/ComplainForm.vue'
 import news from '../components/citizens/SectorNews.vue'
 import service from '../components/citizens/SectorService.vue'
 import HomePage from '../components/citizens/HomePage.vue'
+import AdminHome from '../views/AdminHomeView.vue'
 
 Vue.use(VueRouter)
 
@@ -50,6 +51,12 @@ const routes = [
     path: '/serivise',
     name: 'service',
     component: service
+  },
+
+  {
+    path: '/AdminHome',
+    name: 'AdminHome',
+    component: AdminHome
   },
 
 ]
