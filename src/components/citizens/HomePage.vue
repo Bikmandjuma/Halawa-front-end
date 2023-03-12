@@ -17,7 +17,7 @@
 
 <style scoped>
   #app {
-   background: url('../../assets/masaka.jpg')
+   background: url('../../assets/home/8.jpg')
       no-repeat center center !important;
       background-size: cover;
       max-height: 490px;

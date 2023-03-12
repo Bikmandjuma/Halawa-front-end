@@ -16,25 +16,15 @@
       </v-row>
 
       <v-row> 
-          <v-col cols="12" md="3" sm="4" v-for="i in 8" :key="i">
+          <v-col cols="12" md="3" sm="4" v-for="i in 20" :key="i">
               <v-card
                 elevation="6"
                 class="mx-auto"
                 max-width="280"
               >
-                <v-card-text class="login-form text-center">
-                    <v-avatar size="120" color="indigo lighten-4">
-                      <v-icon size="80">mdi-account</v-icon>
-                    </v-avatar>
-                    <p>Etant civile</p>
-                    <p>Ntiruhungwa Bikman djuma</p>
-                    <p>0785389000</p>
-                    <!-- <p>ntiruhungwab@gmail.com</p> -->
-
-                    <router-link to="/socialmedia" id="employee_social_media"><v-icon color="info">mdi-whatsapp</v-icon> </router-link>
-                    <router-link to="/socialmedia" id="employee_social_media"><v-icon color="info">mdi-email</v-icon> </router-link>
-                    <!-- <router-link to="/socialmedia" id="employee_social_media"><v-icon color="info">mdi-facebook</v-icon> </router-link> -->
-                </v-card-text>
+                <!-- <v-card-text class="login-form text-center"> -->
+                    <v-img src="../assets/home/1.jpg"></v-img>
+                <!-- </v-card-text> -->
                 
               </v-card>
 
