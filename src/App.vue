@@ -18,7 +18,7 @@
           <v-btn text @click="scroll('leaders')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-multiple</v-icon>Leaders</v-btn>
           <v-btn text @click="scroll('muslims')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-group</v-icon>All Muslims</v-btn>
           <v-btn text @click="scroll('contact')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-phone</v-icon> Contact</v-btn>
-          <v-btn text @click="scroll('login')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account</v-icon> Login</v-btn>
+          <v-btn text @click="compose({})" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account</v-icon> Login</v-btn>
     </v-app-bar>
 
     <!-- Add a navigation bar -->
@@ -175,9 +175,14 @@
             <br/>
             <v-row>
                <v-col cols="12" md="3" sm="4" v-for="i in 4" :key="i">
-                  <v-card>
+                  <v-card class="elevation-8">
                     <h5>Title</h5>  
-                    <v-avatar width="100" height="100"><v-icon>mdi-account</v-icon> </v-avatar>
+                    <v-avatar width="100" height="100">
+                      <v-img
+                        src="https://cdn.vuetifyjs.com/images/john.jpg"
+                        alt="John"
+                      ></v-img>
+                    </v-avatar>
                     <h3>both names</h3>
                     <span>
                       <v-icon>mdi-phone</v-icon>
@@ -211,7 +216,7 @@
                       <v-text-field
                         label="Names"
                         variant="solo"
-                        placeholder="Andika nimero ya telefone yawe"
+                        placeholder="enter fullname. . . .  ex:Bikman djuma"
                         prepend-inner-icon="mdi-account"
                         style="margin-top:-10px;"
                       ></v-text-field>
@@ -224,7 +229,7 @@
                     >
                       <v-text-field
                         label="Email"
-                        placeholder="Enter email . . . "
+                        placeholder="Enter email . . .  ex:bikman@gmail.com"
                         variant="filled"
                         prepend-inner-icon="mdi-email"
                         style="margin-top:-20px;"
@@ -238,10 +243,10 @@
                     >
                       <v-textarea
                         label="Message"
-                        placeholder="Type message . . . ."
+                        placeholder="Type message . . . ex: hi bikman"
                         variant="outlined"
                         rows="2"
-                        prepend-inner-icon="mdi-pencil"
+                        prepend-inner-icon="mdi-email-edit"
                         style="margin-top:-25px;"
                       ></v-textarea>
                     </v-col>
@@ -254,7 +259,26 @@
             </v-card>
           </v-col>
           <!--end of contact us-->
+          <br />
 
+              
+            <!--login model-->
+              <v-dialog
+                  v-model="dialogCompose"
+                  width="300">
+                  <v-card>
+                      <v-card-title class="headline info" primary-title>
+                        Login here<v-btn text class="ml-auto" style="display: relative;float: right;" @click="saveDraft()" outlined color="white">&times;</v-btn>
+                      </v-card-title>
+                      <v-card-text class="pa-5">
+                          
+                      </v-card-text>
+                      <v-card-actions class="pa-5">
+                          
+                      </v-card-actions>
+                  </v-card>
+              </v-dialog>
+            <!--end of login model-->
 
     </v-container>
 
@@ -346,12 +370,21 @@ export default {
       scroll(refName){
         const element=document.getElementById(refName);
         element.scrollIntoView({behavior:"smooth"});
-      }
+      },
+
+      compose() {
+          this.dialogCompose = true
+      },
+      saveDraft() {
+          this.dialogCompose = false
+      },
   },
 
   data () {
     return {
       drawer: false,
+      dialogCompose:false,
+      valid:true,
       tab: null,
       slider2:50,
       page:1,
