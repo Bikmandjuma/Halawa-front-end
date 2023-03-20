@@ -1,7 +1,53 @@
-<template>
+<template style="margin-top:200px;">
+  
+  <v-app>
+      <v-app-bar app class="info" height="70">
+          <v-app-bar-nav-icon 
+              @click="drawer = true" 
+              class="d-flex d-sm-none"
+              color="white"
+            ></v-app-bar-nav-icon> 
+
+        <v-btn text id="Project-name" color="white">
+              <v-icon>mdi-mosque</v-icon> &nbsp;Halawat&nbsp;al-iman
+        </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn text @click="scroll('home')" color="white" v-model="tab" class="d-none d-sm-flex"><router-link to="/" style="color: white;"><v-icon>mdi-home</v-icon> Home </router-link> </v-btn>
+          <v-btn text @click="scroll('about')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-wrench</v-icon> About</v-btn>
+          <v-btn text @click="scroll('activity')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-alt-list</v-icon> Activity</v-btn>
+          <v-btn text @click="scroll('gallery')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-image</v-icon>Gallery</v-btn>
+          <v-btn text @click="scroll('leaders')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-multiple</v-icon>Leaders</v-btn>
+          <v-btn text @click="scroll('muslims')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-group</v-icon>All Muslims</v-btn>
+          <v-btn text @click="scroll('contact')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-phone</v-icon> Contact</v-btn>
+          <v-btn text @click="scroll('login')" color="white" v-model="tab" class="d-none d-sm-flex"><router-link to="/login"  style="color: white;"><v-icon>mdi-account</v-icon> Login</router-link></v-btn>
+    </v-app-bar>
+
+    <!-- Add a navigation bar -->
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group>
+          <h2><b>Masaka sector</b></h2><br>
+          <v-list-item><router-link to="/"><v-icon color="primary" class="main-link">mdi-home</v-icon>Ahabanza</router-link></v-list-item>
+             <v-list-item><router-link to="/amakuru"><v-icon color="primary" class="main-link">mdi-newspaper</v-icon>Amakuru</router-link></v-list-item>
+             <v-list-item><router-link to="/serivise"><v-icon color="primary" class="main-link">mdi-wrench</v-icon>Serivise</router-link></v-list-item>
+             <v-list-item><router-link to="/complain"><v-icon color="primary" class="main-links">mdi-pen</v-icon>Waba ufite ikibazo</router-link></v-list-item>
+             <v-list-item><router-link to="/abakozi"><v-icon color="primary" class="main-link">mdi-account-multiple</v-icon>Abakozi</router-link></v-list-item>
+             <v-list-item><router-link to="/login"><v-icon color="primary">mdi-lock-open</v-icon> Fungura(Login)</router-link></v-list-item>
+
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
   <v-container>
-      
-      <v-row class="login-row">
+      <div id="login">
+      <v-row class="login-row" style="margin-top: 100px;">
           <v-col cols="12" md="4" sm="4"></v-col>
           <v-col cols="12" md="4" sm="4">
 
@@ -67,8 +113,9 @@
           </v-col>
           <v-col cols="12" md="4" sm="4"></v-col>
         </v-row>
-
+    </div>
   </v-container>
+</v-app>
 </template>
 
 <script>
@@ -78,6 +125,8 @@ export default {
 
   data(){
     return {
+       drawer: false,
+      tab: null,
       title:'Login here',
       uname:'',
       nameRules:[
@@ -115,6 +164,16 @@ export default {
 </script>
 
 <style scoped>
+
+  a{
+    text-decoration: none;
+    color: white;
+  }
+
+  a:link{
+    text-decoration: none;
+    color: white;
+  }
   .v-card--reveal {
     bottom: 0;
     opacity: 1 !important;

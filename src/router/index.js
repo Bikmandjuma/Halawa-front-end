@@ -6,10 +6,7 @@ import Employee from '../components/EmployeesList.vue'
 import ComplainForm from '../components/ComplainForm.vue'
 import news from '../components/citizens/SectorNews.vue'
 import service from '../components/citizens/SectorService.vue'
-import HomePage from '../components/citizens/HomePage.vue'
-// import AboutHome from '../views/AboutHome.vue'
-// import GuestIndex from '../views/pages/guest/components/View.vue'
-
+import HomePage from '../views/index.vue'
 
 Vue.use(VueRouter)
 
@@ -18,6 +15,12 @@ const routes = [
     path: '/login',
     name: 'LoginPage',
     component: LoginPage
+  },
+
+  {
+    path: '/cool',
+    name: 'HomePage',
+    component: HomePage
   },
 
   {
@@ -36,12 +39,6 @@ const routes = [
     path: '/complain',
     name: 'citizen-complain',
     component: ComplainForm
-  },
-
-   {
-    path: '/',
-    name: 'HomePage',
-    component: HomePage
   },
 
    {

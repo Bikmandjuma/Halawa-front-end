@@ -18,13 +18,13 @@
           <v-btn text @click="scroll('leaders')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-multiple</v-icon>Leaders</v-btn>
           <v-btn text @click="scroll('muslims')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-group</v-icon>All Muslims</v-btn>
           <v-btn text @click="scroll('contact')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-phone</v-icon> Contact</v-btn>
-          <v-btn text @click="scroll('login')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account</v-icon> Login</v-btn>
+          <v-btn text @click="scroll('login')" color="white" v-model="tab" class="d-none d-sm-flex"><router-link to="/login" style="color: white;"><v-icon>mdi-account</v-icon> Login</router-link></v-btn>
     </v-app-bar>
 
     <!-- Add a navigation bar -->
     <v-navigation-drawer
       v-model="drawer"
-      fixed
+      absolute
       temporary
     >
       <v-list
@@ -33,7 +33,7 @@
       >
         <v-list-item-group>
           <h2><b>Masaka sector</b></h2><br>
-          <v-list-item @click="scroll('home')"><v-icon color="primary" class="main-link">mdi-home</v-icon>Ahabanza</v-list-item>
+          <v-list-item><router-link to="/"><v-icon color="primary" class="main-link">mdi-home</v-icon>Ahabanza</router-link></v-list-item>
              <v-list-item><router-link to="/amakuru"><v-icon color="primary" class="main-link">mdi-newspaper</v-icon>Amakuru</router-link></v-list-item>
              <v-list-item><router-link to="/serivise"><v-icon color="primary" class="main-link">mdi-wrench</v-icon>Serivise</router-link></v-list-item>
              <v-list-item><router-link to="/complain"><v-icon color="primary" class="main-links">mdi-pen</v-icon>Waba ufite ikibazo</router-link></v-list-item>
@@ -110,152 +110,7 @@
                   </v-carousel>
                   
           </template>
-
-          <v-col cols="12" md="12" sm="12"  id="about" class="text-center justify-content" mt-20>
-            <h2><u> About us</u></h2>
-            <!-- <div style='width:200px;justify-content:center;align-items:center;'>
-            <v-slider v-model="slider2" color="yellow"></v-slider>
-            </div> -->
-
-            <v-card class="elevation-12">
-              <v-card-item>about us cintent goes here</v-card-item>
-            </v-card>
-          </v-col>
-
-          <v-col cols="12" md="12" sm="12"  id="activity" class="text-center justify-content">
-            <h2><u>Activities</u></h2>
-            <br/>
-            <!-- <div style='width:200px;justify-content:center;align-items:center;'>
-            <v-slider v-model="slider2" color="yellow"></v-slider>
-            </div> -->
-
-            <v-card class="elevation-12">
-              <v-row>
-                <v-col cols="12"  md="4" sm="3">
-                  image
-                </v-col>
-                <v-col cols="12"  md="8" sm="3">
-                  content
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-col>
-
-          <v-col cols="12" md="12" sm="12" id="gallery" mt-6 class="text-center">
-            <h2><u>Gallery</u></h2>
-            <br/>
-            <v-row>
-               <v-col cols="12" md="3" sm="4" v-for="i in 20" :key="i">
-                  <v-card
-                    elevation="6"
-                    class="mx-auto"
-                    max-width="340"
-                  >
-                    <!-- <v-card-text class="login-form text-center"> -->
-                        <v-img src="@/assets/home/1.jpg"></v-img>
-                    <!-- </v-card-text> -->
-                    
-                  </v-card>
-
-              </v-col>
-
-              <v-col cols="12" md="12" sm="12" class="text-center">
-                <v-pagination 
-                  v-model="page"
-                  :length="15"
-                  :total-visible="7"
-                ></v-pagination>
-              </v-col>
-
-            </v-row>
-          </v-col>
-
-          <v-col cols="12" md="12" sm="12" id="leaders" mt-6 class="text-center">
-            <h2><u>Leaders</u></h2>
-            <br/>
-            <v-row>
-               <v-col cols="12" md="3" sm="4" v-for="i in 4" :key="i">
-                  <v-card>
-                    <h5>Title</h5>  
-                    <v-avatar width="100" height="100"><v-icon>mdi-account</v-icon> </v-avatar>
-                    <h3>both names</h3>
-                    <span>
-                      <v-icon>mdi-phone</v-icon>
-                      <v-icon>mdi-email</v-icon>
-                      <v-icon>mdi-whatsapp</v-icon>
-                    </span>
-                  </v-card>
-              </v-col>
-
-            </v-row>
-          </v-col>
-
-          <!--contact us-->
-          <v-col cols="12" md="12" sm="12" id="contact" mt-10 class="text-center">
-            <v-card class="elevation-12">
-            <v-row>
-
-                <v-col cols="12" md="4" sm="4">
-                  contact info
-                </v-col>
-
-                
-                  <v-col cols="12" md="8" sm="4">
-                    <h2>Leave a message here !</h2>
-                    <v-form class="form">
-                      <v-col
-                      cols="12"
-                      sm="12"
-                      md="12"
-                    >
-                      <v-text-field
-                        label="Names"
-                        variant="solo"
-                        placeholder="Andika nimero ya telefone yawe"
-                        prepend-inner-icon="mdi-account"
-                        style="margin-top:-10px;"
-                      ></v-text-field>
-                    </v-col>
-
-                    <v-col
-                      cols="12"
-                      sm="12"
-                      md="12"
-                    >
-                      <v-text-field
-                        label="Email"
-                        placeholder="Enter email . . . "
-                        variant="filled"
-                        prepend-inner-icon="mdi-email"
-                        style="margin-top:-20px;"
-                      ></v-text-field>
-                    </v-col>
-
-                    <v-col
-                      cols="12"
-                      sm="12"
-                      md="12"
-                    >
-                      <v-textarea
-                        label="Message"
-                        placeholder="Type message . . . ."
-                        variant="outlined"
-                        rows="2"
-                        prepend-inner-icon="mdi-pencil"
-                        style="margin-top:-25px;"
-                      ></v-textarea>
-                    </v-col>
-
-                    <v-btn color="info">Send <v-icon>mdi-send</v-icon></v-btn>
-                    </v-form>
-                  </v-col>
-                
-            </v-row>
-            </v-card>
-          </v-col>
-          <!--end of contact us-->
-
-
+          
     </v-container>
 
     <router-view />
@@ -348,13 +203,10 @@ export default {
         element.scrollIntoView({behavior:"smooth"});
       }
   },
-
   data () {
     return {
       drawer: false,
       tab: null,
-      slider2:50,
-      page:1,
       image:{
         avatar:'masaka.jpg'
       },
@@ -417,11 +269,6 @@ export default {
     text-decoration: none;
     color:whitesmoke;
 /*    margin-left: 130px;*/
-  }
-
-  form{
-    padding:0px 20px 0px 20px;
-    margin-top: 40px;
   }
 
   #footer-links a:hover{
