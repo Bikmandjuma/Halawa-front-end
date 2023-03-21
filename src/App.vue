@@ -211,19 +211,19 @@
 
           <!--all muslims-->
            <v-col cols="12" md="12" sm="12" id="muslims" mt-6 class="text-center">
-            <h2><u>All Muslims <v-badge inline color="primary" content="20"></v-badge></u></h2>
+            <h1 class="info--text">All Muslims <v-badge inline color="primary" content="N"></v-badge></h1>
             <br/>
             <v-row>
                <v-col cols="12" md="3" sm="4" v-for="i in 8" :key="i">
                   <v-card class="elevation-8">
-                    <h5 class="mt-3">Title</h5>  
+                    <h4 class="mt-3">Title</h4>  
                     <v-avatar width="100" height="100" class="mt-3">
                       <v-img
                         src="https://cdn.vuetifyjs.com/images/john.jpg"
                         alt="John"
                       ></v-img>
                     </v-avatar>
-                    <h3 class="mt-4">both names</h3>
+                    <h3 class="mt-4">Firstname Lastname</h3>
                     <br />
                     <span style="padding-bottom:5px;">
                       <v-icon color="primary">mdi-phone</v-icon>&nbsp;&nbsp;
@@ -239,28 +239,26 @@
 
           <!--contact us-->
           <v-col cols="12" md="12" sm="12" id="contact"  class="text-center">
-            <h2>Contact us</h2><br />
+            <h1 class="info--text">Contact us</h1><br />
             <v-card class="elevation-12">
             <v-row>
 
                 <v-col cols="12" md="4" sm="4">
-                  <h4>contact info</h4>
-                  <v-slider v-model="slider2" color="yellow"></v-slider>
+                  <h2>contact info</h2>
+                  <div style="margin-top:45px;">
+                      <v-icon>mdi-map-marker</v-icon>
+                      <p>Rulindo tumba</p>
 
-                  <v-icon>mdi-map-marker</v-icon>
-                  <p>Rulindo tumba</p>
+                      <v-icon>mdi-phone</v-icon>
+                      <p>+0780000000</p>
 
-                  <v-icon>mdi-phone</v-icon>
-                  <p>+0780000000</p>
-
-                  <v-icon>mdi-email</v-icon>
-                  <p>halawa@gmail.com</p>
+                      <v-icon>mdi-email</v-icon>
+                      <p>halawa@gmail.com</p>
+                  </div>
                 </v-col>
 
-                <v-col cols="12" md="8" sm="4" class="justify-content">
+                <v-col cols="12" md="8" sm="4">
                     <h2><v-icon>mdi-comment</v-icon>&nbsp;Leave a message here !</h2>
-                    <v-slider v-model="slider2" color="yellow"></v-slider>
-
                     <v-form class="form">
                       <v-col
                       cols="12"
@@ -380,51 +378,57 @@
     <v-footer id="footer">
       <v-row>
         <v-col cols="12" md="4" ms="12" class="text-center">
-          <h3 class="white--text"><v-icon color="white">mdi-home</v-icon>Masaka Sector</h3><br>
-          <p class="white--text">Muhawe ikaze mu murenge wa masaka <br>waba ufite ikibazo ?</p>
-          <router-link to="/complain"> <v-btn style="color: steelblue;">Kanda hano</v-btn></router-link>
+          <h3 class="white--text"><v-icon color="white">mdi-mosque</v-icon> Halawat al-iman</h3><br>
+          <p class="white--text">We are IPRC TUMBA students' Muslims this website is used for our management activities like storing our stuff and many more . . . .</p>
         </v-col>
         <v-col cols="12" md="4" ms="12" id="footer-links">
-          <h3 class="text-center white--text"><v-icon color="white">mdi-hand-down</v-icon> Aho Wakanda(links)</h3><br>
+          <h3 class="text-center white--text">where to click (links)&nbsp;<v-icon color="white">mdi-gesture-double-tap</v-icon></h3><br>
           
-          <v-row class="text-center">
+          <v-row class="text-center" id="footer-row">
             <v-col
                 cols="12"
-                sm="6"
-                md="6"
+                sm="4"
+                md="4"
             >
-              <p><router-link to="/"><v-icon color="white">mdi-home</v-icon> Ahabanza</router-link></p>
+              <p class="white--text" @click="scroll('home')" ><v-icon color="white">mdi-home</v-icon>Home</p>
           
-              <p><router-link to="/amakuru"><v-icon color="white">mdi-newspaper</v-icon> Amakuru</router-link></p>
+              <p class="white--text" @click="scroll('about')" ><v-icon color="white">mdi-newspaper</v-icon> About</p>
             
-              <p><router-link to="/serivise"><v-icon color="white">mdi-wrench</v-icon> Serivise</router-link></p>
+              <p class="white--text" @click="scroll('activity')" ><v-icon color="white">mdi-semantic-web</v-icon> Activity</p>
+
+            </v-col>
+            
+            <v-col
+                cols="12"
+                sm="4"
+                md="4"
+            >
+
+              <p class="white--text" @click="scroll('gallery')" ><v-icon color="white">mdi-image</v-icon> Gallery</p>
+            
+              <p class="white--text" @click="scroll('leaders')" ><v-icon color="white">mdi-account-multiple</v-icon> Leaders</p>
+            
+              <p class="white--text" @click="scroll('muslims')" ><v-icon color="white">mdi-account-group</v-icon> Muslims</p>
             </v-col>
 
             <v-col
-                cols="12"
-                sm="6"
-                md="6"
+              cols="12"
+              sm="4"
+              md="4"
             >
-              <p><router-link to="/complain"><v-icon color="white" class="main-links">mdi-pen</v-icon> Waba ufite ikibazo</router-link></p>
-            
-              <p><router-link to="/abakozi"><v-icon color="white">mdi-account-multiple</v-icon> Abakozi</router-link></p>
-           
-              <p><router-link to="/login"><v-icon color="white">mdi-lock-open</v-icon> Staff's Login</router-link></p>
+              
+              <p class="white--text" @click="scroll('contact')" ><v-icon color="white">mdi-phone</v-icon> Contact</p>
+              <p class="white--text" @click="compose({})" ><v-icon color="white">mdi-lock-open</v-icon> Login</p>
             </v-col>
 
           </v-row>
 
         </v-col>
         <v-col cols="12" md="4" ms="12" id="footer-address" class="text-center">
-          <h3 class="white--text">Aho Wadusanga (Address)</h3><br>
-            <p><router-link to="/contact"><v-icon color="white">mdi-phone</v-icon> +250785389000</router-link></p>
-            <p><router-link to="#"><v-icon color="white">mdi-map-marker</v-icon>Kigali,Kicukiro,Masaka</router-link></p>
-            <div id="footer-social-media">
-              <router-link to="/facebook"><v-icon color="white">mdi-facebook</v-icon></router-link>
-              <router-link to="/whatsapp"><v-icon color="white">mdi-whatsapp</v-icon></router-link>
-              <router-link to="/twitter"><v-icon color="white">mdi-twitter</v-icon></router-link>
-              <router-link to="/email"><v-icon color="white">mdi-email</v-icon></router-link>
-            </div>
+          <h3 class="white--text">Location (address)</h3><br>
+            <p class="white--text"><v-icon color="white">mdi-phone</v-icon>&nbsp;+250780000000</p>
+            <p class="white--text"><v-icon color="white">mdi-map-marker</v-icon>&nbsp;western-rulindo-tumba</p>
+            <p class="white--text"><v-icon color="white">mdi-email</v-icon>&nbsp;halawa@gmail.com</p>
         </v-col>
         
         <v-row>
@@ -434,7 +438,7 @@
               md="12"
               class="text-center"
         >
-          <p class="white--text">Copyright &copy; {{currentyear}} , Masaka sector </p>
+          <p class="white--text">Copyright &copy; 2022 - {{currentyear}} , Halawat al-iman </p>
 
         </v-col>
       </v-row>
@@ -545,6 +549,11 @@ export default {
     padding:10px;
   }
 
+  #footer-row p:hover{
+    cursor: pointer;
+    color: black;
+  }
+
   #tabs_nav:hover{
     color:red;
     border-bottom:2px solid red;
@@ -564,41 +573,13 @@ export default {
 
   form{
     padding:0px 20px 0px 20px;
-    margin-top: -20px;
-  }
-
-  #footer-links a:hover{
-    color:white;
-/*    margin-left:135px;*/
-    margin-left: 5px;
-  }
-
-  #footer-social-media a{
-    text-decoration: none;
-    padding: 10px;
-  }
-
-  #footer-address a{
-    text-decoration: none;
-    color:white;
-  }
-
-  #footer-address a:hover{
-    margin-left: 5px;
+    margin-top: 40px;
   }
 
   a{
     text-decoration: none;
   }
 
-  .main-link{
-    margin-top: -5px;
-  }
-
-  .main-links{
-    margin-top: -5px;
-    transform: rotate(-0.25turn);
-  }
 
   #Project-name{
       padding-top:0px;
