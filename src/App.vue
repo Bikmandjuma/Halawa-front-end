@@ -12,14 +12,23 @@
               <v-icon>mdi-mosque</v-icon> &nbsp;<h2>Halawat&nbsp;al-iman</h2>
         </v-btn>
           <v-spacer></v-spacer>
-          <v-btn text @click="scroll('home')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-home</v-icon> Home</v-btn>
-          <v-btn text @click="scroll('about')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-newspaper</v-icon> About</v-btn>
-          <v-btn text @click="scroll('activity')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-semantic-web</v-icon> Activity</v-btn>
-          <v-btn text @click="scroll('gallery')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-image</v-icon>Gallery</v-btn>
-          <v-btn text @click="scroll('leaders')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-multiple</v-icon>Leaders</v-btn>
-          <v-btn text @click="scroll('muslims')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-group</v-icon>All Muslims</v-btn>
-          <v-btn text @click="scroll('contact')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-phone</v-icon> Contact</v-btn>
-          <v-btn text @click="compose({})" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account</v-icon> Login</v-btn>
+
+           <v-tabs
+            v-model="tab"
+            align-with-title
+            class="d-none d-sm-flex"
+            id="tabs_nav"
+            style="margin-top:20px;"
+          >
+              <tab @click="scroll('home')" color="white"><v-icon color="white">mdi-home</v-icon> Home</tab>
+              <tab @click="scroll('about')" color="white"><v-icon color="white">mdi-newspaper</v-icon> About</tab>
+              <tab @click="scroll('activity')" color="white"><v-icon color="white">mdi-semantic-web</v-icon> Activity</tab>
+              <tab @click="scroll('gallery')" color="white"><v-icon color="white">mdi-image</v-icon>Gallery</tab>
+              <tab @click="scroll('leaders')" color="white"><v-icon color="white">mdi-account-multiple</v-icon>Leaders</tab>
+              <tab @click="scroll('muslims')" color="white"><v-icon color="white">mdi-account-group</v-icon>All Muslims</tab>
+              <tab @click="scroll('contact')" color="white"><v-icon color="white">mdi-phone</v-icon> Contact</tab>
+              <tab @click="compose({})" color="white"><v-icon color="white">mdi-account</v-icon> Login</tab>
+        </v-tabs>
     </v-app-bar>
 
     <!-- Add a navigation bar -->
@@ -114,8 +123,8 @@
                   
           </template>
 
-          <v-col cols="12" md="12" sm="12"  id="about" class="text-center justify-content mt-30">
-            <h2><u> About us</u></h2>
+          <v-col cols="12" md="12" sm="12"  id="about" class="text-center justify-content mt-16">
+            <h1 class="info--text">About us</h1>
             <!-- <div style='width:200px;justify-content:center;align-items:center;'>
             <v-slider v-model="slider2" color="yellow"></v-slider>
             </div> -->
@@ -136,8 +145,8 @@
 
           </v-col>
 
-          <v-col cols="12" md="12" sm="12"  id="activity" class="text-center">
-            <h2>Activities</h2>
+          <v-col cols="12" md="12" sm="12"  id="activity" class="text-center mt-16">
+            <h1 class="info--text">Activities</h1>
             <!-- <br/> -->
             <div id="slider-line">
                 <v-slider v-model="slider2" color="yellow"></v-slider>
@@ -156,7 +165,7 @@
           </v-col>
 
           <v-col cols="12" md="12" sm="12" id="gallery" mt-6 class="text-center">
-            <h2><u>Gallery</u></h2>
+            <h1 class="info--text">Gallery</h1>
             <br/>
             <v-row>
                <v-col cols="12" md="3" sm="4" v-for="i in 20" :key="i">
@@ -184,8 +193,8 @@
             </v-row>
           </v-col>
 
-          <v-col cols="12" md="12" sm="12" id="leaders" mt-6 class="text-center">
-            <h2><u>Leaders</u></h2>
+          <v-col cols="12" md="12" sm="12" id="leaders"  class="text-center mt-16">
+            <h1 class="info--text">Leaders</h1>
             <br/>
             <v-row>
                <v-col cols="12" md="3" sm="4" v-for="i in 4" :key="i">
@@ -211,7 +220,7 @@
 
           <!--all muslims-->
            <v-col cols="12" md="12" sm="12" id="muslims" mt-6 class="text-center">
-            <h1 class="info--text">All Muslims <v-badge inline color="primary" content="N"></v-badge></h1>
+            <h1 class="info--text">All Muslims <v-badge color="info" content="N"></v-badge></h1>
             <br/>
             <v-row>
                <v-col cols="12" md="3" sm="4" v-for="i in 8" :key="i">
@@ -246,19 +255,19 @@
                 <v-col cols="12" md="4" sm="4">
                   <h2>contact info</h2>
                   <div style="margin-top:45px;">
-                      <v-icon>mdi-map-marker</v-icon>
+                      <v-icon color="info">mdi-map-marker</v-icon>
                       <p>Rulindo tumba</p>
 
-                      <v-icon>mdi-phone</v-icon>
+                      <v-icon color="info">mdi-phone</v-icon>
                       <p>+0780000000</p>
 
-                      <v-icon>mdi-email</v-icon>
+                      <v-icon color="info">mdi-email</v-icon>
                       <p>halawa@gmail.com</p>
                   </div>
                 </v-col>
 
                 <v-col cols="12" md="8" sm="4">
-                    <h2><v-icon>mdi-comment</v-icon>&nbsp;Leave a message here !</h2>
+                    <h2><v-icon color="info">mdi-comment</v-icon>&nbsp;Leave a message here !</h2>
                     <v-form class="form">
                       <v-col
                       cols="12"
@@ -321,7 +330,8 @@
                   <v-card class="justify-content text-center">
 
                       <v-card-text>
-                        <h2 style="margin-top:5px;">Login</h2>
+                        <h2 style="margin-top:5px;"><v-icon>mdi-lock-open</v-icon>&nbsp;Login</h2>
+                        <p @click="saveDraft()" id="cancel_times" style="color: red;display: relative; margin-top: -20px;margin-left:250px;">X</p>
                             <v-form>
                               <v-text-field
                                 label="Username"
@@ -333,11 +343,11 @@
                                 label="Password"
                                 variant="solo"
                                 placeholder="Enter password"
-                                prepend-inner-icon="mdi-lock"
+                                prepend-inner-icon="mdi-key"
                                 type="password"
                               ></v-text-field>
                               <v-btn color="primary"><v-icon>mdi-lock-open</v-icon>&nbsp;&nbsp;Login</v-btn>
-                              <p @click="reveal=true" class="mt-3" style="font-size: 18px;"><v-icon>mdi-key</v-icon>Forgot password</p>
+                              <p @click="reveal=true" class="mt-5" style="font-size: 18px;"><v-icon>mdi-lock-question</v-icon>Forgot password</p>
                             </v-form>
 
                       </v-card-text>
@@ -349,7 +359,9 @@
                           style="height: 100%;"
                         >
                           <v-card-text class="pb-0">
-                            <h2>Forgot password</h2>
+                            <h2><v-icon>mdi-lock-question</v-icon> Forgot password</h2>
+                            <p @click="saveDraft()" id="cancel_times" style="color: red;display: relative; margin-top: -20px;margin-left:250px;">X</p>
+
                             <v-form>
                               <v-text-field
                                 label="Email"
@@ -519,6 +531,19 @@ export default {
     width: 100%;
   }
 
+  .main-link-btn{
+    padding: 0px;
+  }
+
+  #cancel_times:hover{
+    cursor: pointer;
+  }
+
+  tab{
+    color: white;
+    padding:10px;
+  }
+
   @media screen and (min-width: 968px) {
     :root {
       --big-font-size: 3.5rem;
@@ -534,29 +559,29 @@ export default {
     }
   }*/
 
+  #tabs_nav tab:hover{
+    color:black;
+    cursor: pointer;
+  }
+  
   #tabs_nav{
     margin-top: -10px;
-    margin-left: 500px;
+    margin-left: 200px;
   }
   #app_bar{
     height:50px;
   }
 
-  #tabs_nav{
+/*  #tabs_nav{
     color:blue;
     left:20px;
     word-spacing: 20px;
     padding:10px;
-  }
+  }*/
 
   #footer-row p:hover{
     cursor: pointer;
     color: black;
-  }
-
-  #tabs_nav:hover{
-    color:red;
-    border-bottom:2px solid red;
   }
 
   #footer{
