@@ -27,7 +27,7 @@
               <tab @click="scroll('leaders')" color="white"><v-icon color="white">mdi-account-multiple</v-icon>Leaders</tab>
               <tab @click="scroll('muslims')" color="white"><v-icon color="white">mdi-account-group</v-icon>All Muslims</tab>
               <tab @click="scroll('contact')" color="white"><v-icon color="white">mdi-phone</v-icon> Contact</tab>
-              <tab @click="compose({})" color="white"><v-icon color="white">mdi-account</v-icon> Login</tab>
+              <tab @click="compose({})" color="white" style="display: relative;margin-left: 30px;"><v-icon color="white">mdi-account</v-icon> Login</tab>
         </v-tabs>
     </v-app-bar>
 
