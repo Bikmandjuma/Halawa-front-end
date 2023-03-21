@@ -1,5 +1,6 @@
 <template>
   <v-app id="home">
+      <v-app-bar color="primary">cool</v-app-bar>
       <v-app-bar app class="info" height="70">
           <v-app-bar-nav-icon 
               @click="drawer = true" 
@@ -8,12 +9,12 @@
             ></v-app-bar-nav-icon> 
 
         <v-btn text id="Project-name" color="white">
-              <v-icon>mdi-mosque</v-icon> &nbsp;Halawat&nbsp;al-iman
+              <v-icon>mdi-mosque</v-icon> &nbsp;<h2>Halawat&nbsp;al-iman</h2>
         </v-btn>
           <v-spacer></v-spacer>
           <v-btn text @click="scroll('home')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-home</v-icon> Home</v-btn>
-          <v-btn text @click="scroll('about')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-wrench</v-icon> About</v-btn>
-          <v-btn text @click="scroll('activity')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-alt-list</v-icon> Activity</v-btn>
+          <v-btn text @click="scroll('about')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-newspaper</v-icon> About</v-btn>
+          <v-btn text @click="scroll('activity')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-semantic-web</v-icon> Activity</v-btn>
           <v-btn text @click="scroll('gallery')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-image</v-icon>Gallery</v-btn>
           <v-btn text @click="scroll('leaders')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-multiple</v-icon>Leaders</v-btn>
           <v-btn text @click="scroll('muslims')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-group</v-icon>All Muslims</v-btn>
@@ -32,13 +33,15 @@
         dense
       >
         <v-list-item-group>
-          <h2><b>Masaka sector</b></h2><br>
-          <v-list-item @click="scroll('home')"><v-icon color="primary" class="main-link">mdi-home</v-icon>Ahabanza</v-list-item>
-             <v-list-item><router-link to="/amakuru"><v-icon color="primary" class="main-link">mdi-newspaper</v-icon>Amakuru</router-link></v-list-item>
-             <v-list-item><router-link to="/serivise"><v-icon color="primary" class="main-link">mdi-wrench</v-icon>Serivise</router-link></v-list-item>
-             <v-list-item><router-link to="/complain"><v-icon color="primary" class="main-links">mdi-pen</v-icon>Waba ufite ikibazo</router-link></v-list-item>
-             <v-list-item><router-link to="/abakozi"><v-icon color="primary" class="main-link">mdi-account-multiple</v-icon>Abakozi</router-link></v-list-item>
-             <v-list-item><router-link to="/login"><v-icon color="primary">mdi-lock-open</v-icon> Fungura(Login)</router-link></v-list-item>
+          <h2><b><v-icon color="primary">mdi-mosque</v-icon>&nbsp;Halawat al-iman</b></h2><br>
+          <v-list-item @click="scroll('home')"><v-icon color="primary" class="main-link">mdi-home</v-icon>Home</v-list-item>
+          <v-list-item @click="scroll('about')"><v-icon color="primary" class="main-link">mdi-newspaper</v-icon>About us</v-list-item>
+          <v-list-item @click="scroll('activity')"><v-icon color="primary" class="main-link">mdi-semantic-web</v-icon>Activity</v-list-item>
+          <v-list-item @click="scroll('gallery')"><v-icon color="primary" class="main-link">mdi-image</v-icon>Gallery</v-list-item>
+          <v-list-item @click="scroll('leaders')"><v-icon color="primary" class="main-link">mdi-account-multiple</v-icon>Leaders</v-list-item>
+          <v-list-item @click="scroll('muslims')"><v-icon color="primary" class="main-link">mdi-account-group</v-icon>Muslims</v-list-item>
+          <v-list-item @click="scroll('contact')"><v-icon color="primary" class="main-link">mdi-phone</v-icon>Contact us</v-list-item>
+          <v-list-item @click="compose({})"><v-icon color="primary">mdi-account</v-icon>Login</v-list-item>
 
         </v-list-item-group>
       </v-list>
@@ -111,23 +114,34 @@
                   
           </template>
 
-          <v-col cols="12" md="12" sm="12"  id="about" class="text-center justify-content" mt-20>
+          <v-col cols="12" md="12" sm="12"  id="about" class="text-center justify-content mt-30">
             <h2><u> About us</u></h2>
             <!-- <div style='width:200px;justify-content:center;align-items:center;'>
             <v-slider v-model="slider2" color="yellow"></v-slider>
             </div> -->
 
-            <v-card class="elevation-12">
-              <v-card-item>about us cintent goes here</v-card-item>
-            </v-card>
+            <v-hover>
+              <template v-slot:default="{ isHovering, props }">
+                <v-card
+                  class="elevation-8"
+                  v-bind="props"
+                  :color="isHovering ? 'primary' : undefined"
+                  title="Hover over me"
+                  text="..."
+                >
+                  <v-card-item>About us content goes here !</v-card-item>
+                </v-card>
+              </template>
+            </v-hover>
+
           </v-col>
 
-          <v-col cols="12" md="12" sm="12"  id="activity" class="text-center justify-content">
-            <h2><u>Activities</u></h2>
-            <br/>
-            <!-- <div style='width:200px;justify-content:center;align-items:center;'>
-            <v-slider v-model="slider2" color="yellow"></v-slider>
-            </div> -->
+          <v-col cols="12" md="12" sm="12"  id="activity" class="text-center">
+            <h2>Activities</h2>
+            <!-- <br/> -->
+            <div id="slider-line">
+                <v-slider v-model="slider2" color="yellow"></v-slider>
+            </div>
 
             <v-card class="elevation-12">
               <v-row>
@@ -195,18 +209,58 @@
             </v-row>
           </v-col>
 
+          <!--all muslims-->
+           <v-col cols="12" md="12" sm="12" id="muslims" mt-6 class="text-center">
+            <h2><u>All Muslims <v-badge inline color="primary" content="20"></v-badge></u></h2>
+            <br/>
+            <v-row>
+               <v-col cols="12" md="3" sm="4" v-for="i in 8" :key="i">
+                  <v-card class="elevation-8">
+                    <h5 class="mt-3">Title</h5>  
+                    <v-avatar width="100" height="100" class="mt-3">
+                      <v-img
+                        src="https://cdn.vuetifyjs.com/images/john.jpg"
+                        alt="John"
+                      ></v-img>
+                    </v-avatar>
+                    <h3 class="mt-4">both names</h3>
+                    <br />
+                    <span style="padding-bottom:5px;">
+                      <v-icon color="primary">mdi-phone</v-icon>&nbsp;&nbsp;
+                      <v-icon color="primary">mdi-email</v-icon>&nbsp;&nbsp;
+                      <v-icon color="primary">mdi-whatsapp</v-icon>
+                    </span>
+                  </v-card>
+              </v-col>
+
+            </v-row>
+          </v-col>
+          <!--end of all muslims-->
+
           <!--contact us-->
-          <v-col cols="12" md="12" sm="12" id="contact" mt-10 class="text-center">
+          <v-col cols="12" md="12" sm="12" id="contact"  class="text-center">
+            <h2>Contact us</h2><br />
             <v-card class="elevation-12">
             <v-row>
 
                 <v-col cols="12" md="4" sm="4">
-                  contact info
+                  <h4>contact info</h4>
+                  <v-slider v-model="slider2" color="yellow"></v-slider>
+
+                  <v-icon>mdi-map-marker</v-icon>
+                  <p>Rulindo tumba</p>
+
+                  <v-icon>mdi-phone</v-icon>
+                  <p>+0780000000</p>
+
+                  <v-icon>mdi-email</v-icon>
+                  <p>halawa@gmail.com</p>
                 </v-col>
 
-                
-                  <v-col cols="12" md="8" sm="4">
-                    <h2>Leave a message here !</h2>
+                <v-col cols="12" md="8" sm="4" class="justify-content">
+                    <h2><v-icon>mdi-comment</v-icon>&nbsp;Leave a message here !</h2>
+                    <v-slider v-model="slider2" color="yellow"></v-slider>
+
                     <v-form class="form">
                       <v-col
                       cols="12"
@@ -266,16 +320,54 @@
               <v-dialog
                   v-model="dialogCompose"
                   width="300">
-                  <v-card>
-                      <v-card-title class="headline info" primary-title>
-                        Login here<v-btn text class="ml-auto" style="display: relative;float: right;" @click="saveDraft()" outlined color="white">&times;</v-btn>
-                      </v-card-title>
-                      <v-card-text class="pa-5">
-                          
+                  <v-card class="justify-content text-center">
+
+                      <v-card-text>
+                        <h2 style="margin-top:5px;">Login</h2>
+                            <v-form>
+                              <v-text-field
+                                label="Username"
+                                variant="solo"
+                                placeholder="Enter email"
+                                prepend-inner-icon="mdi-email"
+                              ></v-text-field>
+                              <v-text-field
+                                label="Password"
+                                variant="solo"
+                                placeholder="Enter password"
+                                prepend-inner-icon="mdi-lock"
+                                type="password"
+                              ></v-text-field>
+                              <v-btn color="primary"><v-icon>mdi-lock-open</v-icon>&nbsp;&nbsp;Login</v-btn>
+                              <p @click="reveal=true" class="mt-3" style="font-size: 18px;"><v-icon>mdi-key</v-icon>Forgot password</p>
+                            </v-form>
+
                       </v-card-text>
-                      <v-card-actions class="pa-5">
+                    
+                      <v-expand-transition>
+                        <v-card
+                          v-if="reveal"
+                          class="v-card--reveal"
+                          style="height: 100%;"
+                        >
+                          <v-card-text class="pb-0">
+                            <h2>Forgot password</h2>
+                            <v-form>
+                              <v-text-field
+                                label="Email"
+                                variant="solo"
+                                placeholder="Enter email"
+                                prepend-inner-icon="mdi-email"
+                              ></v-text-field>
+                              <v-btn color="primary mt-3">Send reset link&nbsp;&nbsp;<v-icon>mdi-send</v-icon></v-btn>
+                              <p @click="reveal=false" class="mt-6" style="font-size: 18px;"><v-icon>mdi-undo</v-icon> Back to login</p>
+                            </v-form>
+
+                          </v-card-text>
                           
-                      </v-card-actions>
+                        </v-card>
+                      </v-expand-transition>
+              
                   </v-card>
               </v-dialog>
             <!--end of login model-->
@@ -382,6 +474,7 @@ export default {
 
   data () {
     return {
+      reveal:false,
       drawer: false,
       dialogCompose:false,
       valid:true,
@@ -414,6 +507,29 @@ export default {
       no-repeat center center fixed !important;
     background-size: cover;
   }
+
+  .v-card--reveal {
+    bottom: 0;
+    opacity: 1 !important;
+    position: absolute;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 968px) {
+    :root {
+      --big-font-size: 3.5rem;
+      --h2-font-size: 2rem;
+      --normal-font-size: 1rem;
+      --smaller-font-size: .875rem;
+    }
+  }
+
+ /* @media screen and ( max-width:300px) {
+    .main-links{
+      margin-top: -50px;
+    }
+  }*/
+
   #tabs_nav{
     margin-top: -10px;
     margin-left: 500px;
@@ -437,12 +553,6 @@ export default {
   #footer{
     background-color:steelblue;
     margin-bottom:0px;
-      
-/*      background: url('assets/footerbg/img2.jfif')*/
-     /* center center !important;
-      background-size: cover;
-      color:whitesmoke;
-      opacity: 0.8;*/
   }
 
 
@@ -454,7 +564,7 @@ export default {
 
   form{
     padding:0px 20px 0px 20px;
-    margin-top: 40px;
+    margin-top: -20px;
   }
 
   #footer-links a:hover{
@@ -481,17 +591,6 @@ export default {
     text-decoration: none;
   }
 
-  /*@media(max-width:376px){
-    #footer{
-      padding-top:10px;
-    }
-
-    #complain_select,#complain_file{
-         margin-top:-25;
-    }
-
-  }*/
-
   .main-link{
     margin-top: -5px;
   }
@@ -503,6 +602,13 @@ export default {
 
   #Project-name{
       padding-top:0px;
+  }
+
+  #slider-line{
+    display:  relative;
+    justify-items: center;
+    float: center;
+    width:200px;justify-content:center;align-items:center
   }
 
 </style>
