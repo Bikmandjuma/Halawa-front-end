@@ -344,7 +344,9 @@
                                 variant="solo"
                                 placeholder="Enter password"
                                 prepend-inner-icon="mdi-key"
-                                type="password"
+                                :type="showpswd ? 'text' : 'password'"
+                                :append-icon="showpswd ? 'mdi-eye' : 'mdi-eye-off'"
+                                @click:append="showpswd=!showpswd"
                               ></v-text-field>
                               <v-btn color="primary"><v-icon>mdi-lock-open</v-icon>&nbsp;&nbsp;Login</v-btn>
                               <p @click="reveal=true" class="mt-5" style="font-size: 18px;"><v-icon>mdi-lock-question</v-icon>Forgot password</p>
@@ -490,6 +492,7 @@ export default {
 
   data () {
     return {
+      showpswd:false,
       reveal:false,
       drawer: false,
       dialogCompose:false,
