@@ -389,6 +389,7 @@
             >
               
               <p class="white--text" @click="scroll('contact')" ><v-icon color="white">mdi-phone</v-icon> Contact</p>
+              <p class="white--text"><router-link to="/muslims/self-registration"><v-icon color="white">mdi-pencil</v-icon>registration</router-link></p>
               <p class="white--text" @click="compose({})" ><v-icon color="white">mdi-lock-open</v-icon> Login</p>
             </v-col>
 
