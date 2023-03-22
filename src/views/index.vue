@@ -2,29 +2,38 @@
   <v-app id="home">
       <v-app-bar app class="info" height="70">
           <v-app-bar-nav-icon 
-              @click="drawer = true" 
+              @click="drawer = true"
               class="d-flex d-sm-none"
               color="white"
             ></v-app-bar-nav-icon> 
 
         <v-btn text id="Project-name" color="white">
-              <v-icon>mdi-mosque</v-icon> &nbsp;Halawat&nbsp;al-iman
+              <v-icon>mdi-mosque</v-icon> &nbsp;<h2>Halawat&nbsp;al-iman</h2>
         </v-btn>
           <v-spacer></v-spacer>
-          <v-btn text @click="scroll('home')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-home</v-icon> Home</v-btn>
-          <v-btn text @click="scroll('about')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-wrench</v-icon> About</v-btn>
-          <v-btn text @click="scroll('activity')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-alt-list</v-icon> Activity</v-btn>
-          <v-btn text @click="scroll('gallery')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-image</v-icon>Gallery</v-btn>
-          <v-btn text @click="scroll('leaders')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-multiple</v-icon>Leaders</v-btn>
-          <v-btn text @click="scroll('muslims')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-account-group</v-icon>All Muslims</v-btn>
-          <v-btn text @click="scroll('contact')" color="white" v-model="tab" class="d-none d-sm-flex"><v-icon>mdi-phone</v-icon> Contact</v-btn>
-          <v-btn text @click="scroll('login')" color="white" v-model="tab" class="d-none d-sm-flex"><router-link to="/login" style="color: white;"><v-icon>mdi-account</v-icon> Login</router-link></v-btn>
+
+           <v-tabs
+            v-model="tab"
+            align-with-title
+            class="d-none d-sm-flex"
+            id="tabs_nav"
+            style="margin-top:20px;"
+          >
+              <tab @click="scroll('home')" color="white"><v-icon color="white">mdi-home</v-icon> Home</tab>
+              <tab @click="scroll('about')" color="white"><v-icon color="white">mdi-newspaper</v-icon> About</tab>
+              <tab @click="scroll('activity')" color="white"><v-icon color="white">mdi-semantic-web</v-icon> Activity</tab>
+              <tab @click="scroll('gallery')" color="white"><v-icon color="white">mdi-image</v-icon>Gallery</tab>
+              <tab @click="scroll('leaders')" color="white"><v-icon color="white">mdi-account-multiple</v-icon>Leaders</tab>
+              <tab @click="scroll('muslims')" color="white"><v-icon color="white">mdi-account-group</v-icon>&nbsp;All Muslims</tab>
+              <tab @click="scroll('contact')" color="white"><v-icon color="white">mdi-phone</v-icon> Contact</tab>
+              <tab @click="compose({})" color="white" style="display: relative;margin-left: 30px;"><v-icon color="white">mdi-account</v-icon> Login</tab>
+        </v-tabs>
     </v-app-bar>
 
     <!-- Add a navigation bar -->
     <v-navigation-drawer
       v-model="drawer"
-      absolute
+      fixed
       temporary
     >
       <v-list
@@ -32,74 +41,31 @@
         dense
       >
         <v-list-item-group>
-          <h2><b>Masaka sector</b></h2><br>
-          <v-list-item><router-link to="/"><v-icon color="primary" class="main-link">mdi-home</v-icon>Ahabanza</router-link></v-list-item>
-             <v-list-item><router-link to="/amakuru"><v-icon color="primary" class="main-link">mdi-newspaper</v-icon>Amakuru</router-link></v-list-item>
-             <v-list-item><router-link to="/serivise"><v-icon color="primary" class="main-link">mdi-wrench</v-icon>Serivise</router-link></v-list-item>
-             <v-list-item><router-link to="/complain"><v-icon color="primary" class="main-links">mdi-pen</v-icon>Waba ufite ikibazo</router-link></v-list-item>
-             <v-list-item><router-link to="/abakozi"><v-icon color="primary" class="main-link">mdi-account-multiple</v-icon>Abakozi</router-link></v-list-item>
-             <v-list-item><router-link to="/login"><v-icon color="primary">mdi-lock-open</v-icon> Fungura(Login)</router-link></v-list-item>
+          <h2><b><v-icon color="primary">mdi-mosque</v-icon>&nbsp;Halawat al-iman</b></h2><br>
+          <v-list-item @click="scroll('home')"><v-icon color="primary" class="main-link">mdi-home</v-icon>Home</v-list-item>
+          <v-list-item @click="scroll('about')"><v-icon color="primary" class="main-link">mdi-newspaper</v-icon>About us</v-list-item>
+          <v-list-item @click="scroll('activity')"><v-icon color="primary" class="main-link">mdi-semantic-web</v-icon>Activity</v-list-item>
+          <v-list-item @click="scroll('gallery')"><v-icon color="primary" class="main-link">mdi-image</v-icon>Gallery</v-list-item>
+          <v-list-item @click="scroll('leaders')"><v-icon color="primary" class="main-link">mdi-account-multiple</v-icon>Leaders</v-list-item>
+          <v-list-item @click="scroll('muslims')"><v-icon color="primary" class="main-link">mdi-account-group</v-icon>Muslims</v-list-item>
+          <v-list-item @click="scroll('contact')"><v-icon color="primary" class="main-link">mdi-phone</v-icon>Contact us</v-list-item>
+          <v-list-item @click="compose({})"><v-icon color="primary">mdi-account</v-icon>Login</v-list-item>
 
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
 
     <v-container fluid mt-15> 
-          
+        <v-col cols="12" md="12" sm="12"  id="home" class="text-center">
           <template>
 
-                <!-- <v-col cols="12" md="4" ms="3" mt-2>
-                  <v-card class="elevation-12" color="info white--text">
-                    <v-card-item>
-                      <v-icon
-                        style="width:200px;height:200px;"
-                      >mdi-mosque</v-icon>
-                      <h1 mt-2>Welcome</h1>
-                      <h1 mt-2>Halawat al-iman</h1>
-                      <p mt-2>We university student muslims's who studies in IPRC Tumba located in rwanda country rulindo district and tumba sector</p>
-                      <span>
-                        <v-icon color="white">mdi-email</v-icon>&nbsp;
-                        <v-icon color="white">mdi-phone</v-icon>&nbsp;
-                        <v-icon color="white">mdi-whatsapp</v-icon>&nbsp;
-                      </span>
-                    </v-card-item>
-                  </v-card>
-                </v-col> -->
                   <v-carousel
                     cycle
-                    show-arrows="hover"
                     hide-delimiter-background
                     height="500"
                     cols="12" md="8" ms="3"
                   >
-                    <!-- <v-carousel-item>
-                      <v-img :src="img1" alt="img goes here"></v-img>
-                    </v-carousel-item>
-
-                    <v-carousel-item>
-                      <v-img :src="img2" alt="img goes here"></v-img>
-                    </v-carousel-item>
-
-                    <v-carousel-item>
-                      <v-img :src="img3" alt="img goes here"></v-img>
-                    </v-carousel-item>
-
-                    <v-carousel-item>
-                      <v-img :src="img4" alt="img goes here"></v-img>
-                    </v-carousel-item>
-
-                    <v-carousel-item>
-                      <v-img :src="img5" alt="img goes here"></v-img>
-                    </v-carousel-item>
-
-                    <v-carousel-item>
-                      <v-img :src="img6" alt="img goes here"></v-img>
-                    </v-carousel-item>
-
-                    <v-carousel-item>
-                      <v-img :src="img7" alt="img goes here"></v-img>
-                    </v-carousel-item> -->
-
+                
                     <v-carousel-item>
                       <v-img :src="img8" alt="img goes here"></v-img>
                     </v-carousel-item>
@@ -110,7 +76,271 @@
                   </v-carousel>
                   
           </template>
-          
+        </v-col>
+
+          <v-col cols="12" md="12" sm="12"  id="about" class="text-center">
+            <h1 class="info--text">About us</h1>
+            <br />
+            <!-- <div style='width:200px;justify-content:center;align-items:center;'>
+            <v-slider v-model="slider2" color="yellow"></v-slider>
+            </div> -->
+
+            <v-hover>
+              <template v-slot:default="{ isHovering, props }">
+                <v-card
+                  class="elevation-8"
+                  v-bind="props"
+                  :color="isHovering ? 'primary' : undefined"
+                  title="Hover over me"
+                  text="..."
+                >
+                  <p>About us content goes here !</p>
+                </v-card>
+              </template>
+            </v-hover>
+
+          </v-col>
+
+          <v-col cols="12" md="12" sm="12"  id="activity" class="text-center">
+            <h1 class="info--text">Activities</h1>
+            <br />
+            <!-- <br/> -->
+            <!-- <div id="slider-line">
+                <v-slider v-model="slider2" color="yellow"></v-slider>
+            </div> -->
+
+            <v-card class="elevation-12">
+              <v-row>
+                <v-col cols="12"  md="4" sm="3">
+                  image
+                </v-col>
+                <v-col cols="12"  md="8" sm="3">
+                  content
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+
+          <v-col cols="12" md="12" sm="12" id="gallery" class="text-center">
+            <h1 class="info--text">Gallery</h1>
+            <br/>
+            <v-row>
+               <v-col cols="12" md="3" sm="4" v-for="i in 20" :key="i">
+                  <v-card
+                    elevation="6"
+                    class="mx-auto"
+                    max-width="340"
+                  >
+                    <!-- <v-card-text class="login-form text-center"> -->
+                        <v-img src="@/assets/home/1.jpg"></v-img>
+                    <!-- </v-card-text> -->
+                    
+                  </v-card>
+
+              </v-col>
+
+              <v-col cols="12" md="12" sm="12" class="text-center">
+                <v-pagination 
+                  v-model="page"
+                  :length="15"
+                  :total-visible="7"
+                ></v-pagination>
+              </v-col>
+
+            </v-row>
+          </v-col>
+
+          <v-col cols="12" md="12" sm="12" id="leaders"  class="text-center">
+            <h1 class="info--text">Leaders</h1>
+            <br/>
+            <v-row>
+               <v-col cols="12" md="3" sm="4" v-for="i in 4" :key="i">
+                  <v-card class="elevation-8">
+                    <h5>Title</h5>  
+                    <v-avatar width="100" height="100">
+                      <v-img
+                        src="https://cdn.vuetifyjs.com/images/john.jpg"
+                        alt="John"
+                      ></v-img>
+                    </v-avatar>
+                    <h3>both names</h3>
+                    <span>
+                      <v-icon>mdi-phone</v-icon>
+                      <v-icon>mdi-email</v-icon>
+                      <v-icon>mdi-whatsapp</v-icon>
+                    </span>
+                  </v-card>
+              </v-col>
+
+            </v-row>
+          </v-col>
+
+          <!--all muslims-->
+           <v-col cols="12" md="12" sm="12" id="muslims" class="text-center">
+            <h1 class="info--text">All Muslims <v-badge color="info" content="N"></v-badge></h1>
+            <br/>
+            <v-row>
+               <v-col cols="12" md="3" sm="4" v-for="i in 8" :key="i">
+                  <v-card class="elevation-8">
+                    <h4 class="mt-3">Title</h4>  
+                    <v-avatar width="100" height="100" class="mt-3">
+                      <v-img
+                        src="https://cdn.vuetifyjs.com/images/john.jpg"
+                        alt="John"
+                      ></v-img>
+                    </v-avatar>
+                    <h3 class="mt-4">Firstname Lastname</h3>
+                    <br />
+                    <span style="padding-bottom:5px;">
+                      <v-icon color="primary">mdi-phone</v-icon>&nbsp;&nbsp;
+                      <v-icon color="primary">mdi-email</v-icon>&nbsp;&nbsp;
+                      <v-icon color="primary">mdi-whatsapp</v-icon>
+                    </span>
+                  </v-card>
+              </v-col>
+
+            </v-row>
+          </v-col>
+          <!--end of all muslims-->
+
+          <!--contact us-->
+          <v-col cols="12" md="12" sm="12" id="contact"  class="text-center">
+            <h1 class="info--text">Contact us</h1><br />
+            <v-card class="elevation-12">
+            <v-row>
+
+                <v-col cols="12" md="4" sm="4">
+                  <h2>contact info</h2>
+                  <div style="margin-top:45px;">
+                      <v-icon color="info">mdi-map-marker</v-icon>
+                      <p>Rulindo tumba</p>
+
+                      <v-icon color="info">mdi-phone</v-icon>
+                      <p>+0780000000</p>
+
+                      <v-icon color="info">mdi-email</v-icon>
+                      <p>halawa@gmail.com</p>
+                  </div>
+                </v-col>
+
+                <v-col cols="12" md="8" sm="4">
+                    <h2><v-icon color="info">mdi-comment</v-icon>&nbsp;Leave a message here !</h2>
+                    <v-form class="form">
+                      <v-col
+                      cols="12"
+                      sm="12"
+                      md="12"
+                    >
+                      <v-text-field
+                        label="Names"
+                        variant="solo"
+                        placeholder="enter fullname. . . .  ex:Bikman djuma"
+                        prepend-inner-icon="mdi-account"
+                        style="margin-top:-10px;"
+                      ></v-text-field>
+                    </v-col>
+
+                    <v-col
+                      cols="12"
+                      sm="12"
+                      md="12"
+                    >
+                      <v-text-field
+                        label="Email"
+                        placeholder="Enter email . . .  ex:bikman@gmail.com"
+                        variant="filled"
+                        prepend-inner-icon="mdi-email"
+                        style="margin-top:-20px;"
+                      ></v-text-field>
+                    </v-col>
+
+                    <v-col
+                      cols="12"
+                      sm="12"
+                      md="12"
+                    >
+                      <v-textarea
+                        label="Message"
+                        placeholder="Type message . . . ex: hi bikman"
+                        variant="outlined"
+                        rows="2"
+                        prepend-inner-icon="mdi-email-edit"
+                        style="margin-top:-25px;"
+                      ></v-textarea>
+                    </v-col>
+
+                    <v-btn color="info">Send <v-icon>mdi-send</v-icon></v-btn>
+                    </v-form>
+                  </v-col>
+                
+            </v-row>
+            </v-card>
+          </v-col>
+          <!--end of contact us-->
+          <br />
+
+              
+            <!--login model-->
+              <v-dialog
+                  v-model="dialogCompose"
+                  width="300">
+                  <v-card class="justify-content text-center">
+
+                      <v-card-text>
+                        <h2 style="margin-top:5px;"><v-icon>mdi-lock-open</v-icon>&nbsp;Login</h2>
+                        <p @click="saveDraft()" id="cancel_times" style="color: red;display: relative; margin-top: -20px;margin-left:250px;">X</p>
+                            <v-form @submit="LoginForm">
+                              <v-text-field
+                                label="Username"
+                                variant="solo"
+                                placeholder="Enter email"
+                                prepend-inner-icon="mdi-email"
+                              ></v-text-field>
+                              <v-text-field
+                                label="Password"
+                                variant="solo"
+                                placeholder="Enter password"
+                                prepend-inner-icon="mdi-key"
+                                :type="showpswd ? 'text' : 'password'"
+                                :append-icon="showpswd ? 'mdi-eye' : 'mdi-eye-off'"
+                                @click:append="showpswd=!showpswd"
+                              ></v-text-field>
+                              <v-btn color="primary"><v-icon>mdi-lock-open</v-icon>&nbsp;Login</v-btn>
+                              <p @click="reveal=true" class="mt-5" id="forgot-paswd" style="font-size: 18px;"><v-icon>mdi-lock-question</v-icon>Forgot password</p>
+                            </v-form>
+
+                      </v-card-text>
+                    
+                      <v-expand-transition>
+                        <v-card
+                          v-if="reveal"
+                          class="v-card--reveal"
+                          style="height: 100%;"
+                        >
+                          <v-card-text class="pb-0">
+                            <h2><v-icon>mdi-lock-question</v-icon> Forgot password</h2>
+                            <p @click="saveDraft()" id="cancel_times" style="color: red;display: relative; margin-top: -20px;margin-left:250px;">X</p>
+
+                            <v-form>
+                              <v-text-field
+                                label="Email"
+                                variant="solo"
+                                placeholder="Enter email"
+                                prepend-inner-icon="mdi-email"
+                              ></v-text-field>
+                              <v-btn color="primary mt-3">Send reset link&nbsp;&nbsp;<v-icon>mdi-send</v-icon></v-btn>
+                              <p @click="reveal=false" class="mt-6" id="back-to-login" style="font-size: 18px;"><v-icon>mdi-undo</v-icon> Back to login</p>
+                            </v-form>
+
+                          </v-card-text>
+                          
+                        </v-card>
+                      </v-expand-transition>
+              
+                  </v-card>
+              </v-dialog>
+            <!--end of login model-->
+
     </v-container>
 
     <router-view />
@@ -119,51 +349,57 @@
     <v-footer id="footer">
       <v-row>
         <v-col cols="12" md="4" ms="12" class="text-center">
-          <h3 class="white--text"><v-icon color="white">mdi-home</v-icon>Masaka Sector</h3><br>
-          <p class="white--text">Muhawe ikaze mu murenge wa masaka <br>waba ufite ikibazo ?</p>
-          <router-link to="/complain"> <v-btn style="color: steelblue;">Kanda hano</v-btn></router-link>
+          <h3 class="white--text"><v-icon color="white">mdi-mosque</v-icon> Halawat al-iman</h3><br>
+          <p class="white--text">We are IPRC TUMBA students' Muslims this website is used for our management activities like storing our stuff and many more . . . .</p>
         </v-col>
         <v-col cols="12" md="4" ms="12" id="footer-links">
-          <h3 class="text-center white--text"><v-icon color="white">mdi-hand-down</v-icon> Aho Wakanda(links)</h3><br>
+          <h3 class="text-center white--text">Usefull links&nbsp;<v-icon color="white">mdi-gesture-double-tap</v-icon></h3><br>
           
-          <v-row class="text-center">
+          <v-row class="text-center" id="footer-row">
             <v-col
                 cols="12"
-                sm="6"
-                md="6"
+                sm="4"
+                md="4"
             >
-              <p><router-link to="/"><v-icon color="white">mdi-home</v-icon> Ahabanza</router-link></p>
+              <p class="white--text" @click="scroll('home')" ><v-icon color="white">mdi-home</v-icon>Home</p>
           
-              <p><router-link to="/amakuru"><v-icon color="white">mdi-newspaper</v-icon> Amakuru</router-link></p>
+              <p class="white--text" @click="scroll('about')" ><v-icon color="white">mdi-newspaper</v-icon> About</p>
             
-              <p><router-link to="/serivise"><v-icon color="white">mdi-wrench</v-icon> Serivise</router-link></p>
+              <p class="white--text" @click="scroll('activity')" ><v-icon color="white">mdi-semantic-web</v-icon> Activity</p>
+
+            </v-col>
+            
+            <v-col
+                cols="12"
+                sm="4"
+                md="4"
+            >
+
+              <p class="white--text" @click="scroll('gallery')" ><v-icon color="white">mdi-image</v-icon> Gallery</p>
+            
+              <p class="white--text" @click="scroll('leaders')" ><v-icon color="white">mdi-account-multiple</v-icon> Leaders</p>
+            
+              <p class="white--text" @click="scroll('muslims')" ><v-icon color="white">mdi-account-group</v-icon> Muslims</p>
             </v-col>
 
             <v-col
-                cols="12"
-                sm="6"
-                md="6"
+              cols="12"
+              sm="4"
+              md="4"
             >
-              <p><router-link to="/complain"><v-icon color="white" class="main-links">mdi-pen</v-icon> Waba ufite ikibazo</router-link></p>
-            
-              <p><router-link to="/abakozi"><v-icon color="white">mdi-account-multiple</v-icon> Abakozi</router-link></p>
-           
-              <p><router-link to="/login"><v-icon color="white">mdi-lock-open</v-icon> Staff's Login</router-link></p>
+              
+              <p class="white--text" @click="scroll('contact')" ><v-icon color="white">mdi-phone</v-icon> Contact</p>
+              <p class="white--text" @click="compose({})" ><v-icon color="white">mdi-lock-open</v-icon> Login</p>
             </v-col>
 
           </v-row>
 
         </v-col>
         <v-col cols="12" md="4" ms="12" id="footer-address" class="text-center">
-          <h3 class="white--text">Aho Wadusanga (Address)</h3><br>
-            <p><router-link to="/contact"><v-icon color="white">mdi-phone</v-icon> +250785389000</router-link></p>
-            <p><router-link to="#"><v-icon color="white">mdi-map-marker</v-icon>Kigali,Kicukiro,Masaka</router-link></p>
-            <div id="footer-social-media">
-              <router-link to="/facebook"><v-icon color="white">mdi-facebook</v-icon></router-link>
-              <router-link to="/whatsapp"><v-icon color="white">mdi-whatsapp</v-icon></router-link>
-              <router-link to="/twitter"><v-icon color="white">mdi-twitter</v-icon></router-link>
-              <router-link to="/email"><v-icon color="white">mdi-email</v-icon></router-link>
-            </div>
+          <h3 class="white--text">Location (address)</h3><br>
+            <p class="white--text"><v-icon color="white">mdi-phone</v-icon>&nbsp;+250780000000</p>
+            <p class="white--text"><v-icon color="white">mdi-map-marker</v-icon>&nbsp;Northern-rulindo-tumba</p>
+            <p class="white--text"><v-icon color="white">mdi-email</v-icon>&nbsp;halawa@gmail.com</p>
         </v-col>
         
         <v-row>
@@ -173,7 +409,7 @@
               md="12"
               class="text-center"
         >
-          <p class="white--text">Copyright &copy; {{currentyear}} , Masaka sector </p>
+          <p class="white--text">Copyright &copy; 2022 - {{currentyear}} , Halawat al-iman </p>
 
         </v-col>
       </v-row>
@@ -196,17 +432,20 @@
   import img9 from '@/assets/home/9.jpg'
 
 export default {
-  name: 'App',
-  methods: {
-      scroll(refName){
-        const element=document.getElementById(refName);
-        element.scrollIntoView({behavior:"smooth"});
-      }
-  },
+  name: 'ViewIndex',
+
   data () {
     return {
+      showpswd:false,
+      reveal:false,
       drawer: false,
+      dialogCompose:false,
+      valid:true,
+      uname:'',
+      pswd:'',
       tab: null,
+      slider2:50,
+      page:1,
       image:{
         avatar:'masaka.jpg'
       },
@@ -218,6 +457,27 @@ export default {
       
     }
   },
+
+  methods: {
+      scroll(refName){
+        const element=document.getElementById(refName);
+        element.scrollIntoView({behavior:"smooth"});
+      },
+
+      compose() {
+          this.dialogCompose = true
+      },
+      saveDraft() {
+          this.dialogCompose = false
+      },
+
+      async LoginForm(e){
+          e.preventDefault();
+          console.log(this.uname+" "+this.pswd);
+      }
+      
+  },
+
   props:{
     // currentyear=new Date.getFullYear();
   }
@@ -227,41 +487,74 @@ export default {
 
 <style scoped>
 
-  #app {
-/*    background: url('https://ohlaladdani.com.br/wp-content/uploads/wallpaper-OHLALADANI_DESKTOP_WALLPAPERS_AVENTURA-2.jpg')*/
-    background: url('https://ohlaladdani.com.br/wp-content/uploads/wallpaper-OHLALADANI_DESKTOP_WALLPAPERS_AVENTURA-2')
-      no-repeat center center fixed !important;
-    background-size: cover;
+  .v-card--reveal {
+    bottom: 0;
+    opacity: 1 !important;
+    position: absolute;
+    width: 100%;
   }
+
+   #back-to-login:hover,#forgot-paswd:hover{
+      cursor: pointer;
+      color:steelblue;
+   }
+
+  .main-link-btn{
+    padding: 0px;
+  }
+
+  #cancel_times:hover{
+    cursor: pointer;
+  }
+
+  tab{
+    color: white;
+    padding:10px;
+  }
+
+  @media screen and (min-width: 968px) {
+    :root {
+      --big-font-size: 3.5rem;
+      --h2-font-size: 2rem;
+      --normal-font-size: 1rem;
+      --smaller-font-size: .875rem;
+    }
+  }
+
+ /* @media screen and ( max-width:300px) {
+    .main-links{
+      margin-top: -50px;
+    }
+  }*/
+
+  #tabs_nav tab:hover{
+    color:grey;
+    cursor: pointer;
+  }
+  
   #tabs_nav{
     margin-top: -10px;
-    margin-left: 500px;
+    margin-left: 200px;
   }
   #app_bar{
     height:50px;
   }
 
-  #tabs_nav{
+/*  #tabs_nav{
     color:blue;
     left:20px;
     word-spacing: 20px;
     padding:10px;
-  }
+  }*/
 
-  #tabs_nav:hover{
-    color:red;
-    border-bottom:2px solid red;
+  #footer-row p:hover{
+    cursor: pointer;
+    color: black;
   }
 
   #footer{
     background-color:steelblue;
     margin-bottom:0px;
-      
-/*      background: url('assets/footerbg/img2.jfif')*/
-     /* center center !important;
-      background-size: cover;
-      color:whitesmoke;
-      opacity: 0.8;*/
   }
 
 
@@ -271,52 +564,25 @@ export default {
 /*    margin-left: 130px;*/
   }
 
-  #footer-links a:hover{
-    color:white;
-/*    margin-left:135px;*/
-    margin-left: 5px;
-  }
-
-  #footer-social-media a{
-    text-decoration: none;
-    padding: 10px;
-  }
-
-  #footer-address a{
-    text-decoration: none;
-    color:white;
-  }
-
-  #footer-address a:hover{
-    margin-left: 5px;
+  form{
+    padding:0px 20px 0px 20px;
+    margin-top: 40px;
   }
 
   a{
     text-decoration: none;
   }
 
-  /*@media(max-width:376px){
-    #footer{
-      padding-top:10px;
-    }
-
-    #complain_select,#complain_file{
-         margin-top:-25;
-    }
-
-  }*/
-
-  .main-link{
-    margin-top: -5px;
-  }
-
-  .main-links{
-    margin-top: -5px;
-    transform: rotate(-0.25turn);
-  }
 
   #Project-name{
       padding-top:0px;
+  }
+
+  #slider-line{
+    display:  relative;
+    justify-items: center;
+    float: center;
+    width:200px;justify-content:center;align-items:center
   }
 
 </style>

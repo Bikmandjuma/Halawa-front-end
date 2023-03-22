@@ -7,6 +7,7 @@ import ComplainForm from '../components/ComplainForm.vue'
 import news from '../components/citizens/SectorNews.vue'
 import service from '../components/citizens/SectorService.vue'
 import HomePage from '../views/index.vue'
+import SelfRegistration from '../views/SelfRegistration.vue'
 
 Vue.use(VueRouter)
 
@@ -18,7 +19,14 @@ const routes = [
   },
 
   {
-    path: '/cool',
+    path: '/muslims/self-registration',
+    name: 'SelfRegistration',
+    component: SelfRegistration
+  },
+
+
+  {
+    path: '/',
     name: 'HomePage',
     component: HomePage
   },
