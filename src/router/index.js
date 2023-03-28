@@ -7,6 +7,7 @@ import ComplainForm from '../components/ComplainForm.vue'
 import news from '../components/citizens/SectorNews.vue'
 import service from '../components/citizens/SectorService.vue'
 import HomePage from '../views/index.vue'
+import UserPage from '../views/user/index.vue'
 import SelfRegistration from '../views/SelfRegistration.vue'
 
 Vue.use(VueRouter)
@@ -23,6 +24,12 @@ const routes = [
     name: 'SelfRegistration',
     component: SelfRegistration
   },
+
+    {
+      path: '/user/panel',
+      name: 'UserPage',
+      component: UserPage
+    },
 
 
   {

@@ -5,11 +5,12 @@
               @click="drawer = true"
               class="d-flex d-sm-none"
               color="white"
-            ></v-app-bar-nav-icon> 
+          ></v-app-bar-nav-icon> 
 
-        <v-btn text id="Project-name" color="white">
+          <v-btn text id="Project-name" color="white">
               <v-icon>mdi-mosque</v-icon> &nbsp;<h2>Halawat&nbsp;al-iman</h2>
-        </v-btn>
+          </v-btn>
+
           <v-spacer></v-spacer>
 
            <v-tabs
@@ -158,10 +159,10 @@
                   <v-card class="elevation-8">
                     <h5>Title</h5>  
                     <v-avatar width="100" height="100">
-                      <v-img
+                      <!--v-img
                         src="https://cdn.vuetifyjs.com/images/john.jpg"
                         alt="John"
-                      ></v-img>
+                      ></v-img-->
                     </v-avatar>
                     <h3>both names</h3>
                     <span>
@@ -184,10 +185,10 @@
                   <v-card class="elevation-8">
                     <h4 class="mt-3">Title</h4>  
                     <v-avatar width="100" height="100" class="mt-3">
-                      <v-img
+                      <!--v-img
                         src="https://cdn.vuetifyjs.com/images/john.jpg"
                         alt="John"
-                      ></v-img>
+                      ></v-img-->
                     </v-avatar>
                     <h3 class="mt-4">Firstname Lastname</h3>
                     <br />
@@ -288,16 +289,21 @@
 
                       <v-card-text>
                         <h2 style="margin-top:5px;"><v-icon>mdi-lock-open</v-icon>&nbsp;Login</h2>
-                        <p @click="saveDraft()" id="cancel_times" style="color: red;display: relative; margin-top: -20px;margin-left:250px;">X</p>
+                        <p @click="CloseModel()" id="cancel_times" style="color: red;display: relative; margin-top: -20px;margin-left:250px;">X</p>
+                            
+                            <p style="color:red;" v-if="WrongCred">{{ WrongCred }}</p>
+
                             <v-form @submit="LoginForm">
                               <v-text-field
                                 label="Username"
                                 variant="solo"
                                 placeholder="Enter email"
                                 prepend-inner-icon="mdi-email"
+                                v-model.trim.lazy="login_email"
                               ></v-text-field>
                               <v-text-field
                                 label="Password"
+                                v-model="login_pswd"
                                 variant="solo"
                                 placeholder="Enter password"
                                 prepend-inner-icon="mdi-key"
@@ -305,7 +311,7 @@
                                 :append-icon="showpswd ? 'mdi-eye' : 'mdi-eye-off'"
                                 @click:append="showpswd=!showpswd"
                               ></v-text-field>
-                              <v-btn color="primary"><v-icon>mdi-lock-open</v-icon>&nbsp;Login</v-btn>
+                              <v-btn color="primary" type="submit"><v-icon>mdi-lock-open</v-icon>&nbsp;Login</v-btn>
                               <p @click="reveal=true" class="mt-5" id="forgot-paswd" style="font-size: 18px;"><v-icon>mdi-lock-question</v-icon>Forgot password</p>
                             </v-form>
 
@@ -319,7 +325,7 @@
                         >
                           <v-card-text class="pb-0">
                             <h2><v-icon>mdi-lock-question</v-icon> Forgot password</h2>
-                            <p @click="saveDraft()" id="cancel_times" style="color: red;display: relative; margin-top: -20px;margin-left:250px;">X</p>
+                            <p @click="CloseModel()" id="cancel_times" style="color: red;display: relative; margin-top: -20px;margin-left:250px;">X</p>
 
                             <v-form>
                               <v-text-field
@@ -327,6 +333,7 @@
                                 variant="solo"
                                 placeholder="Enter email"
                                 prepend-inner-icon="mdi-email"
+                                v-model.trim.lazy="forgotpswd_email"
                               ></v-text-field>
                               <v-btn color="primary mt-3">Send reset link&nbsp;&nbsp;<v-icon>mdi-send</v-icon></v-btn>
                               <p @click="reveal=false" class="mt-6" id="back-to-login" style="font-size: 18px;"><v-icon>mdi-undo</v-icon> Back to login</p>
@@ -442,10 +449,11 @@ export default {
       drawer: false,
       dialogCompose:false,
       valid:true,
-      uname:'',
-      pswd:'',
+      login_email:'',
+      login_pswd:'',
       tab: null,
       slider2:50,
+      WrongCred:'',
       page:1,
       image:{
         avatar:'masaka.jpg'
@@ -454,7 +462,7 @@ export default {
       // img1,img2,img3,img4,img5,
       // img6,img7,
       img8,img9,
-      currentyear:2023
+      currentyear:new Date().getFullYear(),
       
     }
   },
@@ -468,20 +476,34 @@ export default {
       compose() {
           this.dialogCompose = true
       },
-      saveDraft() {
+      CloseModel() {
           this.dialogCompose = false
       },
 
-      async LoginForm(e){
-          e.preventDefault();
-          console.log(this.uname+" "+this.pswd);
+      LoginForm(e){
+          e.preventDefault()
+
+          // let result=await axios.post('http://localhost:8000/login',{
+          //   email:this.login_email,
+          //   password:this.login_pswd
+          // });
+
+
+          if (this.login_email == "bikman@gmail.com" && this.login_pswd == "bugarama123@") {
+              this.$router.push({name:'UserPage'})
+          }else{
+              this.WrongCred="Wrong credentials !";
+          }
+
+          // if (result.status == 201) {
+          //   console.log("Login true");
+          // }else{
+          //   console.log("wrong credentials");
+          // }
       }
       
   },
 
-  props:{
-    // currentyear=new Date.getFullYear();
-  }
 
 }
 </script>
