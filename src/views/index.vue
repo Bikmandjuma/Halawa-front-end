@@ -42,7 +42,7 @@
         dense
       >
         <v-list-item-group>
-          <h2><b><v-icon color="primary">mdi-mosque</v-icon>&nbsp;Halawat al-iman</b></h2><br>
+          <h4><b><v-icon color="primary">mdi-mosque</v-icon>&nbsp;Halawat al-iman</b></h4><br>
           <v-list-item @click="scroll('home')"><v-icon color="primary" class="main-link">mdi-home</v-icon>Home</v-list-item>
           <v-list-item @click="scroll('about')"><v-icon color="primary" class="main-link">mdi-newspaper</v-icon>About us</v-list-item>
           <v-list-item @click="scroll('activity')"><v-icon color="primary" class="main-link">mdi-semantic-web</v-icon>Activity</v-list-item>
@@ -226,7 +226,7 @@
 
                 <v-col cols="12" md="8" sm="4">
                     <h2><v-icon color="info">mdi-comment</v-icon>&nbsp;Leave a message here !</h2>
-                    <v-form class="form">
+                    <v-form class="form lazy-validation" v-model="SendCommentValid" ref="SendComment">
                       <v-col
                       cols="12"
                       sm="12"
@@ -238,6 +238,10 @@
                         placeholder="enter fullname. . . .  ex:Bikman djuma"
                         prepend-inner-icon="mdi-account"
                         style="margin-top:-10px;"
+                        required
+                        :rules="NameCommentRules"
+                        v-model="NameComment"
+
                       ></v-text-field>
                     </v-col>
 
@@ -252,6 +256,9 @@
                         variant="filled"
                         prepend-inner-icon="mdi-email"
                         style="margin-top:-20px;"
+                        required
+                        :rules="EmailRules"
+                        v-model="EmailComment"
                       ></v-text-field>
                     </v-col>
 
@@ -265,12 +272,16 @@
                         placeholder="Type message . . . ex: hi bikman"
                         variant="outlined"
                         rows="2"
-                        prepend-inner-icon="mdi-email-edit"
+                        prepend-inner-icon="mdi-pencil"
                         style="margin-top:-25px;"
+                        required
+                        :rules="[rules.required]"
+                        v-model="MessageComment"
+                        counter
                       ></v-textarea>
                     </v-col>
 
-                    <v-btn color="info">Send <v-icon>mdi-send</v-icon></v-btn>
+                    <v-btn color="info" @click="SendCommentBtn" type="submit" :disabled="!SendCommentValid">Send <v-icon>mdi-send</v-icon></v-btn>
                     </v-form>
                   </v-col>
                 
@@ -280,7 +291,6 @@
           <!--end of contact us-->
           <br />
 
-              
             <!--login model-->
               <v-dialog
                   v-model="dialogCompose"
@@ -291,27 +301,32 @@
                         <h2 style="margin-top:5px;"><v-icon>mdi-lock-open</v-icon>&nbsp;Login</h2>
                         <p @click="CloseModel()" id="cancel_times" style="color: red;display: relative; margin-top: -20px;margin-left:250px;">X</p>
                             
-                            <p style="color:red;" v-if="WrongCred">{{ WrongCred }}</p>
+                            <p style="color:green;" v-if="welllogin">{{ welllogin }}</p>
+                            <p style="color:red;" v-else-if="WrongCred">{{ WrongCred }}</p>
 
-                            <v-form @submit="LoginForm">
+                            <v-form ref="LoginForm" v-model="valid" @submit="SubmitLogin" class="lazy-validation">
                               <v-text-field
-                                label="Username"
+                                label="Email"
                                 variant="solo"
                                 placeholder="Enter email"
                                 prepend-inner-icon="mdi-email"
-                                v-model.trim.lazy="login_email"
+                                v-model.trim.lazy="loginEmail"
+                                required
+                                :rules="EmailRules"
                               ></v-text-field>
                               <v-text-field
                                 label="Password"
-                                v-model="login_pswd"
                                 variant="solo"
                                 placeholder="Enter password"
                                 prepend-inner-icon="mdi-key"
                                 :type="showpswd ? 'text' : 'password'"
                                 :append-icon="showpswd ? 'mdi-eye' : 'mdi-eye-off'"
                                 @click:append="showpswd=!showpswd"
+                                v-model="loginPassword"
+                                :rules="[rules.required]"
+                                
                               ></v-text-field>
-                              <v-btn color="primary" type="submit"><v-icon>mdi-lock-open</v-icon>&nbsp;Login</v-btn>
+                              <v-btn color="primary" :disabled="!valid" type="submit" @click="validate"><v-icon>mdi-lock-open</v-icon>&nbsp;Login</v-btn>
                               <p @click="reveal=true" class="mt-5" id="forgot-paswd" style="font-size: 18px;"><v-icon>mdi-lock-question</v-icon>Forgot password</p>
                             </v-form>
 
@@ -327,15 +342,17 @@
                             <h2><v-icon>mdi-lock-question</v-icon> Forgot password</h2>
                             <p @click="CloseModel()" id="cancel_times" style="color: red;display: relative; margin-top: -20px;margin-left:250px;">X</p>
 
-                            <v-form>
+                            <v-form v-model="ForgotPswdValid" ref="ForgotPSWD" class="lazy-validation" @submit="SubmitForgotPSWD">
                               <v-text-field
                                 label="Email"
                                 variant="solo"
                                 placeholder="Enter email"
                                 prepend-inner-icon="mdi-email"
-                                v-model.trim.lazy="forgotpswd_email"
+                                v-model.trim.lazy="forgotpswdEmail"
+                                required
+                                :rules="EmailRules"
                               ></v-text-field>
-                              <v-btn color="primary mt-3">Send reset link&nbsp;&nbsp;<v-icon>mdi-send</v-icon></v-btn>
+                              <v-btn color="primary mt-3" type="submit" :disabled="!ForgotPswdValid" @click="ValidateForgotPSWD">Send reset link&nbsp;&nbsp;<v-icon>mdi-send</v-icon></v-btn>
                               <p @click="reveal=false" class="mt-6" id="back-to-login" style="font-size: 18px;"><v-icon>mdi-undo</v-icon> Back to login</p>
                             </v-form>
 
@@ -438,7 +455,7 @@
   // import img7 from '@/assets/home/7.jpg'
   import img8 from '@/assets/home/8.jpg'
   import img9 from '@/assets/home/9.jpg'
-
+  import Axios from 'axios'
 export default {
   name: 'ViewIndex',
 
@@ -448,9 +465,11 @@ export default {
       reveal:false,
       drawer: false,
       dialogCompose:false,
-      valid:true,
-      login_email:'',
-      login_pswd:'',
+      valid:false,
+      SendCommentValid:false,
+      ForgotPswdValid:false,
+      loginPassword: "",
+      loginEmail: "",
       tab: null,
       slider2:50,
       WrongCred:'',
@@ -462,9 +481,27 @@ export default {
       // img1,img2,img3,img4,img5,
       // img6,img7,
       img8,img9,
+      forgotpswdEmail:'',
+      NameComment:'',
+      EmailComment:'',
+      MessageComment:'',
       currentyear:new Date().getFullYear(),
+      EmailRules: [
+        v => !!v || "Required",
+        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      ],
+
+      rules: {
+        required: value => !!value || "Required."
+      },
+
+      NameCommentRules: [
+          value => !!value || "Required.",
+          value => /[A-Za-z]/.test(value) || "Enter only text please !"
+      ],
       
     }
+
   },
 
   methods: {
@@ -476,34 +513,64 @@ export default {
       compose() {
           this.dialogCompose = true
       },
+
       CloseModel() {
           this.dialogCompose = false
       },
 
-      LoginForm(e){
+      async validate(e) {
           e.preventDefault()
-
-          // let result=await axios.post('http://localhost:8000/login',{
-          //   email:this.login_email,
-          //   password:this.login_pswd
-          // });
-
-
-          if (this.login_email == "bikman@gmail.com" && this.login_pswd == "bugarama123@") {
-              this.$router.push({name:'UserPage'})
-          }else{
-              this.WrongCred="Wrong credentials !";
+          const loginResult=await Axios.post('http://localhost:8000/api/login',{
+            email:this.loginEmail,
+            password:this.loginPassword,
+          });
+          
+          console.warn(loginResult);
+          if(loginResult.status == 200){
+            localStorage.setItem("user-token",JSON.stringify(loginResult.data))
+            this.$router.push({name:"UserPage"})
           }
 
-          // if (result.status == 201) {
-          //   console.log("Login true");
-          // }else{
-          //   console.log("wrong credentials");
-          // }
+          if(!loginResult){
+            alert("Wrong credentials !");
+          }
+       
+      },
+
+      reset() {
+        this.$refs.form.reset();
+      },
+
+      resetValidation() {
+        this.$refs.form.resetValidation();
+      },
+
+      async ValidateForgotPSWD(e){
+            e.preventDefault()
+
+            console.log('forgot pswd is clicked !');
+
+      },
+
+      async SendCommentBtn(e){
+          e.preventDefault()
+          //code of send message goes here  ... !
       }
-      
+
   },
 
+  mounted(){
+    let user_token=localStorage.setItem("user-token");
+    if (user_token) {
+      this.$router.push({name:'UserPage'});
+    }
+  }
+
+  // watch: {
+  //   validate() {
+  //       this.$refs.form.reset()
+  //   }
+  // },
 
 }
 </script>

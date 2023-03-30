@@ -6,7 +6,7 @@
 				color="white"
 				class="d-flex d-sm-none"
 			></v-app-bar-nav-icon>
-			<v-btn text color="white"><v-icon>mdi-mosque</v-icon>&nbsp;<h2>Halawat&nbsp;al-iman</h2></v-btn>
+			<v-btn text color="white"><v-icon>mdi-mosque</v-icon>&nbsp;<h4>Halawat&nbsp;al-iman</h4></v-btn>
 
 			<v-spacer></v-spacer>
 
@@ -27,14 +27,14 @@
 				dense
 				nav
 			>
-				<v-list-item-group><h2><b><v-icon color="primary">mdi-mosque</v-icon>&nbsp;Halawat al-iman</b></h2><br><v-list-item><router-link to="/"> <v-icon color="primary" class="main-link">mdi-home</v-icon>Home</router-link></v-list-item></v-list-item-group>
+				<v-list-item-group><h4><b><v-icon color="primary">mdi-mosque</v-icon>&nbsp;Halawat al-iman</b></h4><br><v-list-item><router-link to="/"> <v-icon color="primary" class="main-link">mdi-home</v-icon>Home</router-link></v-list-item></v-list-item-group>
 			</v-list>
 		</v-navigation-drawer>
 		
 		<v-container fluid mt-15>
 			
 			<v-col cols="12" md="12" sm="12" class="text-center">
-				<div v-if="true">
+				<div v-if="false">
 					<h2><v-icon>mdi-information</v-icon> Fill this form please !</h2>					
 					<v-card class="elevation-12">
 						<v-form>
@@ -111,17 +111,25 @@
 						</v-form>
 					</v-card>
 				</div>
-				<div v-else-if="false">
+				<div v-else-if="true">
 					<h2>Ooops sorry , form not appeared</h2><br />
 					<p>Form is disabled by Amir ,tell him to enable it</p>
 
 					<br />
 
 					<p>You can get him on one of these addresses&nbsp;<v-icon>mdi-hand-pointing-down</v-icon></p>
-
 					<br />
+					<div v-for="test in test" :key="test.id">
+							<div v-for="cool in test" :key="cool.id">
+								<div v-if="cool.study_status == 'Graduated' && cool.role == 'Imam'">
 
-					<a href="tel:+0783589000"><v-icon color="info">mdi-phone</v-icon></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://wa.me/+250785389000"><v-icon color="info">mdi-whatsapp</v-icon></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://mailto:halawa@gmail.com"><v-icon color="info">mdi-email</v-icon></a>
+										<a :href="'tel:+25'+cool.phone"><v-icon color="info">mdi-phone</v-icon></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a :href="'https://wa.me/'+cool.phone"><v-icon color="info">mdi-whatsapp</v-icon></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a :href="'mailto:'+cool.email"><v-icon color="info">mdi-email</v-icon></a>
+
+								</div>
+
+							</div>
+					</div>
+					
 				</div>
 
 			</v-col>		
@@ -138,14 +146,14 @@
 			return {
 				drawer:false,
 				tab:null,
-
+				test:[],
 				items:[
 					'Male',
 					'Female',
 				],
 
 				StillStudies:[
-					'Still learning',
+					'Still studying',
 					'Already Graduated',
 				],
 
@@ -164,6 +172,18 @@
 					'Other',
 				]
 			}
+		},
+
+		methods:{
+			async testfn(){
+				const api=await fetch("http://localhost:8000/api/ViewAllMuslims");
+				const res=await api.json();
+				this.test=res;
+			}
+		},
+
+		mounted(){
+			this.testfn()
 		}
 	}
 </script>

@@ -56,6 +56,12 @@
           </template>&nbsp;
           <v-list-item-title :class="link">{{ text }}</v-list-item-title>
         </v-list-item>
+        <v-list-item>
+          <v-form @submit="logoutfn">
+              <v-btn color="info" type="submit"><v-icon>mdi-lock</v-icon> Logout</v-btn>
+          </v-form>
+        </v-list-item>
+
 
       </v-list>
 
@@ -68,8 +74,8 @@
         class="py-8 px-6 text-center"
         fluid
       >
-          
-          <h2>content goes here !</h2>
+
+          <h2>content goes here ! {{ info }}</h2>
 
       </v-container>
     </v-main>
@@ -77,6 +83,7 @@
 </template>
 
 <script>
+
   export default {
     name:'UserIndex',
     data: () => ({
@@ -90,7 +97,38 @@
         ['mdi-phone', 'Contact us'],
       ],
 
+      info:[],
+
     }),
+
+    methods:{
+      async logoutfn(e){
+        e.preventDefault()
+        localStorage.removeItem("user-token")
+        this.$router.push({name:'HomePage'});
+      },
+
+      async getUserData(){
+        const userapi=await fetch("http://localhost:8000/api/user/info");
+        const res=await userapi.json();
+        // this.inf=res;
+        console.log(res);
+      },
+
+      async protectRoute(){
+          let user_token=localStorage.setItem("user-token");
+          if (!user_token) {
+              this.$router.push({name:'HomePage'});
+          }
+      },
+
+    },
+
+    mounted(){
+      this.getUserData(),
+      this.protectRoute()
+    }
+
   }
 </script>
 
