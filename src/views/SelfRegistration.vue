@@ -113,7 +113,7 @@
 				</div>
 				<div v-else-if="true">
 					<h2>Ooops sorry , form not appeared</h2><br />
-					<p>Form is disabled by Amir ,tell him to enable it</p>
+					<p>Form is disabled by Amir ,tell him to enable it </p>
 
 					<br />
 
@@ -129,6 +129,7 @@
 
 							</div>
 					</div>
+					{{ test }}
 					
 				</div>
 

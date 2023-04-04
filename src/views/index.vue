@@ -16,8 +16,9 @@
            <v-tabs
             v-model="tab"
             align-with-title
-            class="d-none d-sm-flex"
+            class="d-none d-sm-flex end"
             id="tabs_nav"
+            align-tabs="end"
             style="margin-top:20px;"
           >
               <tab @click="scroll('home')" color="white"><v-icon color="white">mdi-home</v-icon> Home</tab>
@@ -63,7 +64,7 @@
                   <v-carousel
                     cycle
                     hide-delimiter-background
-                    height="500"
+                    max-height="100%"
                     cols="12" md="8" ms="3"
                   >
                 
@@ -86,19 +87,15 @@
             <v-slider v-model="slider2" color="yellow"></v-slider>
             </div> -->
 
-            <v-hover>
-              <template v-slot:default="{ isHovering, props }">
                 <v-card
-                  class="elevation-8"
-                  v-bind="props"
-                  :color="isHovering ? 'primary' : undefined"
+                  class="elevation-8"                 
                   title="Hover over me"
                   text="..."
                 >
-                  <p>About us content goes here !</p>
+                  <!-- <p>About us content goes here !</p> -->
+                   <div>{{ AboutContents }}</div>
+
                 </v-card>
-              </template>
-            </v-hover>
 
           </v-col>
 
@@ -130,10 +127,10 @@
                   <v-card
                     elevation="6"
                     class="mx-auto"
-                    max-width="340"
+                   
                   >
                     <!-- <v-card-text class="login-form text-center"> -->
-                        <v-img src="@/assets/home/1.jpg"></v-img>
+                        <v-img src="@/assets/home/8.jpg"></v-img>
                     <!-- </v-card-text> -->
                     
                   </v-card>
@@ -159,13 +156,13 @@
                   <v-card class="elevation-8">
                     <h5>Title</h5>  
                     <v-avatar width="100" height="100">
-                      <!--v-img
+                      <v-img
                         src="https://cdn.vuetifyjs.com/images/john.jpg"
                         alt="John"
-                      ></v-img-->
+                      ></v-img>
                     </v-avatar>
                     <h3>both names</h3>
-                    <span>
+                    <span class="pt-2">
                       <v-icon>mdi-phone</v-icon>
                       <v-icon>mdi-email</v-icon>
                       <v-icon>mdi-whatsapp</v-icon>
@@ -185,10 +182,10 @@
                   <v-card class="elevation-8">
                     <h4 class="mt-3">Title</h4>  
                     <v-avatar width="100" height="100" class="mt-3">
-                      <!--v-img
+                      <v-img
                         src="https://cdn.vuetifyjs.com/images/john.jpg"
                         alt="John"
-                      ></v-img-->
+                      ></v-img>
                     </v-avatar>
                     <h3 class="mt-4">Firstname Lastname</h3>
                     <br />
@@ -275,9 +272,10 @@
                         prepend-inner-icon="mdi-pencil"
                         style="margin-top:-25px;"
                         required
+                        :counter="2"
                         :rules="[rules.required]"
                         v-model="MessageComment"
-                        counter
+                        
                       ></v-textarea>
                     </v-col>
 
@@ -481,6 +479,7 @@ export default {
       // img1,img2,img3,img4,img5,
       // img6,img7,
       img8,img9,
+      AboutContents:'',
       forgotpswdEmail:'',
       NameComment:'',
       EmailComment:'',
@@ -555,22 +554,20 @@ export default {
       async SendCommentBtn(e){
           e.preventDefault()
           //code of send message goes here  ... !
+      },
+
+      async AboutContent(){
+          const about=await fetch("http://localhost:8000/api/ViewAboutUs");
+          const AboutResult=await about.json();
+          this.AboutContents=AboutResult;
       }
 
   },
 
   mounted(){
-    let user_token=localStorage.setItem("user-token");
-    if (user_token) {
-      this.$router.push({name:'UserPage'});
-    }
+    this.AboutContent()
   }
 
-  // watch: {
-  //   validate() {
-  //       this.$refs.form.reset()
-  //   }
-  // },
 
 }
 </script>
@@ -618,13 +615,15 @@ export default {
   }*/
 
   #tabs_nav tab:hover{
-    color:grey;
+    color:#eee;
     cursor: pointer;
   }
   
   #tabs_nav{
+    display:relative;
     margin-top: -10px;
-    margin-left: 200px;
+    margin-left:40%;
+
   }
   #app_bar{
     height:50px;
@@ -647,7 +646,6 @@ export default {
     margin-bottom:0px;
   }
 
-
   #footer-links a{
     text-decoration: none;
     color:whitesmoke;
@@ -662,7 +660,6 @@ export default {
   a{
     text-decoration: none;
   }
-
 
   #Project-name{
       padding-top:0px;

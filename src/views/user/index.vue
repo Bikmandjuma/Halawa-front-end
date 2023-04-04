@@ -18,7 +18,27 @@
       <v-spacer></v-spacer>
 
       <v-icon color="white">mdi-magnify</v-icon>&nbsp;&nbsp;&nbsp;
-      <v-icon color="white">mdi-account</v-icon>
+
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-btn
+            v-bind="props"
+            style="border:none;background: none;"
+          >
+            <v-icon color="white">mdi-account</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(item, index) in items"
+            :key="index"
+            :value="index"
+          >
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+      
 
     </v-app-bar>
 
@@ -98,6 +118,13 @@
       ],
 
       info:[],
+
+      items: [
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me 2' },
+      ],
 
     }),
 
