@@ -89,12 +89,30 @@
 
                 <v-card
                   class="elevation-8"                 
-                  title="Hover over me"
                   text="..."
                 >
                   <!-- <p>About us content goes here !</p> -->
-                   <div>{{ AboutContents }}</div>
+                   <div v-for="data in AboutContents" :key="data.id">
+                      <div v-for="about in data" :key="about.id">
+                         <v-row>
+                            <v-col cols="12" md="4" sm="4">
+                                <v-img class="p-2" src="@/assets/home/8.jpg" alt="about us image"></v-img>
+                            </v-col>
+                            <v-col cols="12" md="8" sm="8"
+                              style="height:300px;overflow:auto;"
+                            >
+                                <span v-for="i in 2" :key="i">
+                                    <p>
+                                        {{ about.content }}
+                                    </p>
+                                </span>
+                            </v-col>
+                         </v-row>
+                      </div>
+                   </div>
 
+
+                   <!-- <span>{{ AboutContents }}</span> -->
                 </v-card>
 
           </v-col>
@@ -154,18 +172,21 @@
             <v-row>
                <v-col cols="12" md="3" sm="4" v-for="i in 4" :key="i">
                   <v-card class="elevation-8">
-                    <h5>Title</h5>  
-                    <v-avatar width="100" height="100">
+                    <h5>Title name</h5>  
+                    <v-avatar
+                      width="100"
+                      height="100"
+                      class="mt-3"
+                    >
                       <v-img
-                        src="https://cdn.vuetifyjs.com/images/john.jpg"
+                        style="border:1px solid black;"
+                        src="https://bikmandjumaportfolio.netlify.app/assets/img/about.jpg"
                         alt="John"
                       ></v-img>
                     </v-avatar>
-                    <h3>both names</h3>
-                    <span class="pt-2">
-                      <v-icon>mdi-phone</v-icon>
-                      <v-icon>mdi-email</v-icon>
-                      <v-icon>mdi-whatsapp</v-icon>
+                    <h3 class="mt-3">both names</h3>
+                    <span class="mt-3">
+                      <v-icon>mdi-phone</v-icon>&nbsp;&nbsp;&nbsp;&nbsp;<v-icon>mdi-email</v-icon>&nbsp;&nbsp;&nbsp;&nbsp;<v-icon>mdi-whatsapp</v-icon>
                     </span>
                   </v-card>
               </v-col>
@@ -479,7 +500,7 @@ export default {
       // img1,img2,img3,img4,img5,
       // img6,img7,
       img8,img9,
-      AboutContents:'',
+      AboutContents:[],
       forgotpswdEmail:'',
       NameComment:'',
       EmailComment:'',
@@ -617,14 +638,15 @@ export default {
   #tabs_nav tab:hover{
     color:#eee;
     cursor: pointer;
+    border-bottom:white;
   }
   
   #tabs_nav{
     display:relative;
     margin-top: -10px;
-    margin-left:40%;
-
+    margin-left:200px;
   }
+  
   #app_bar{
     height:50px;
   }
