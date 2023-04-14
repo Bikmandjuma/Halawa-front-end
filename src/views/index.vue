@@ -81,8 +81,11 @@
         </v-col>
 
           <v-col cols="12" md="12" sm="12"  id="about" class="text-center">
+            <br />
+            <br />
             <h1 class="info--text">About us</h1>
             <br />
+            
             <!-- <div style='width:200px;justify-content:center;align-items:center;'>
             <v-slider v-model="slider2" color="yellow"></v-slider>
             </div> -->
@@ -91,6 +94,7 @@
                   class="elevation-8"                 
                   text="..."
                 >
+                  
                   <!-- <p>About us content goes here !</p> -->
                    <div v-for="data in AboutContents" :key="data.id">
                       <div v-for="about in data" :key="about.id">

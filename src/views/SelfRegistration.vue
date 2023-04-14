@@ -34,7 +34,7 @@
 		<v-container fluid mt-15>
 			
 			<v-col cols="12" md="12" sm="12" class="text-center">
-				<div v-if="false">
+				<div v-if="true">
 					<h2><v-icon>mdi-information</v-icon> Fill this form please !</h2>					
 					<v-card class="elevation-12">
 						<v-form>
@@ -111,7 +111,7 @@
 						</v-form>
 					</v-card>
 				</div>
-				<div v-else-if="true">
+				<div v-else-if="false">
 					<h2>Ooops sorry , form not appeared</h2><br />
 					<p>Form is disabled by Amir ,tell him to enable it </p>
 
